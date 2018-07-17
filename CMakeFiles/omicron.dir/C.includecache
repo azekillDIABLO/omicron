@@ -1,0 +1,986 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tux/Dev ++/Omicron/deps/glew/src/glew.c
+GL/glew.h
+-
+GL/wglew.h
+-
+GL/glxew.h
+-
+dlfcn.h
+-
+stdio.h
+-
+stdlib.h
+-
+stdlib.h
+-
+string.h
+-
+AvailabilityMacros.h
+-
+dlfcn.h
+-
+mach-o/dyld.h
+-
+
+/home/tux/Dev ++/Omicron/deps/lodepng/lodepng.c
+lodepng.h
+/home/tux/Dev ++/Omicron/deps/lodepng/lodepng.h
+stdio.h
+-
+stdlib.h
+-
+fstream
+-
+
+/home/tux/Dev ++/Omicron/deps/lodepng/lodepng.h
+string.h
+-
+vector
+-
+string
+-
+lodepng.h
+/home/tux/Dev ++/Omicron/deps/lodepng/lodepng.h
+iostream
+-
+lodepng.h
+/home/tux/Dev ++/Omicron/deps/lodepng/lodepng.h
+
+/home/tux/Dev ++/Omicron/deps/noise/noise.c
+math.h
+-
+stdlib.h
+-
+string.h
+-
+
+/home/tux/Dev ++/Omicron/deps/sqlite/sqlite3.c
+config.h
+/home/tux/Dev ++/Omicron/deps/sqlite/config.h
+stdint.h
+-
+inttypes.h
+-
+tcl.h
+-
+stdarg.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+assert.h
+-
+stddef.h
+-
+TargetConditionals.h
+-
+windows.h
+-
+ctype.h
+-
+time.h
+-
+sys/sysctl.h
+-
+malloc/malloc.h
+-
+libkern/OSAtomic.h
+-
+malloc.h
+-
+pthread.h
+-
+math.h
+-
+sys/types.h
+-
+sys/stat.h
+-
+fcntl.h
+-
+unistd.h
+-
+sys/time.h
+-
+errno.h
+-
+sys/mman.h
+-
+sys/ioctl.h
+-
+semaphore.h
+-
+limits.h
+-
+sys/file.h
+-
+sys/param.h
+-
+sys/mount.h
+-
+utime.h
+-
+sys/dcmd_blk.h
+-
+sys/statvfs.h
+-
+dlfcn.h
+-
+sys/cygwin.h
+-
+sqlite3rtree.h
+/home/tux/Dev ++/Omicron/deps/sqlite/sqlite3rtree.h
+unicode/utypes.h
+-
+unicode/uregex.h
+-
+unicode/ustring.h
+-
+unicode/ucol.h
+-
+unicode/ubrk.h
+-
+unicode/utf16.h
+-
+
+/home/tux/Dev ++/Omicron/deps/tinycthread/tinycthread.c
+tinycthread.h
+/home/tux/Dev ++/Omicron/deps/tinycthread/tinycthread.h
+stdlib.h
+-
+signal.h
+-
+sched.h
+-
+unistd.h
+-
+sys/time.h
+-
+errno.h
+-
+process.h
+-
+sys/timeb.h
+-
+
+/home/tux/Dev ++/Omicron/deps/tinycthread/tinycthread.h
+time.h
+-
+pthread.h
+-
+windows.h
+-
+
+/home/tux/Dev ++/Omicron/src/attrib.h
+
+/home/tux/Dev ++/Omicron/src/auth.c
+curl/curl.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+auth.h
+/home/tux/Dev ++/Omicron/src/auth.h
+
+/home/tux/Dev ++/Omicron/src/auth.h
+
+/home/tux/Dev ++/Omicron/src/chunk.h
+GL/glew.h
+-
+map.h
+/home/tux/Dev ++/Omicron/src/map.h
+sign.h
+/home/tux/Dev ++/Omicron/src/sign.h
+
+/home/tux/Dev ++/Omicron/src/client.c
+winsock2.h
+-
+windows.h
+-
+netdb.h
+-
+unistd.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+client.h
+/home/tux/Dev ++/Omicron/src/client.h
+tinycthread.h
+/home/tux/Dev ++/Omicron/src/tinycthread.h
+
+/home/tux/Dev ++/Omicron/src/client.h
+
+/home/tux/Dev ++/Omicron/src/config.h
+
+/home/tux/Dev ++/Omicron/src/cube.c
+math.h
+-
+cube.h
+/home/tux/Dev ++/Omicron/src/cube.h
+item.h
+/home/tux/Dev ++/Omicron/src/item.h
+matrix.h
+/home/tux/Dev ++/Omicron/src/matrix.h
+util.h
+/home/tux/Dev ++/Omicron/src/util.h
+
+/home/tux/Dev ++/Omicron/src/cube.h
+
+/home/tux/Dev ++/Omicron/src/db.c
+string.h
+-
+db.h
+/home/tux/Dev ++/Omicron/src/db.h
+ring.h
+/home/tux/Dev ++/Omicron/src/ring.h
+sqlite3.h
+/home/tux/Dev ++/Omicron/src/sqlite3.h
+tinycthread.h
+/home/tux/Dev ++/Omicron/src/tinycthread.h
+
+/home/tux/Dev ++/Omicron/src/db.h
+map.h
+/home/tux/Dev ++/Omicron/src/map.h
+sign.h
+/home/tux/Dev ++/Omicron/src/sign.h
+
+/home/tux/Dev ++/Omicron/src/inventory.c
+inventory.h
+/home/tux/Dev ++/Omicron/src/inventory.h
+
+/home/tux/Dev ++/Omicron/src/inventory.h
+stdint.h
+-
+item.h
+/home/tux/Dev ++/Omicron/src/item.h
+
+/home/tux/Dev ++/Omicron/src/item.c
+item.h
+/home/tux/Dev ++/Omicron/src/item.h
+util.h
+/home/tux/Dev ++/Omicron/src/util.h
+
+/home/tux/Dev ++/Omicron/src/item.h
+
+/home/tux/Dev ++/Omicron/src/main.c
+GL/glew.h
+-
+GLFW/glfw3.h
+-
+curl/curl.h
+-
+math.h
+-
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+time.h
+-
+attrib.h
+/home/tux/Dev ++/Omicron/src/attrib.h
+auth.h
+/home/tux/Dev ++/Omicron/src/auth.h
+chunk.h
+/home/tux/Dev ++/Omicron/src/chunk.h
+client.h
+/home/tux/Dev ++/Omicron/src/client.h
+config.h
+/home/tux/Dev ++/Omicron/src/config.h
+cube.h
+/home/tux/Dev ++/Omicron/src/cube.h
+db.h
+/home/tux/Dev ++/Omicron/src/db.h
+inventory.h
+/home/tux/Dev ++/Omicron/src/inventory.h
+item.h
+/home/tux/Dev ++/Omicron/src/item.h
+map.h
+/home/tux/Dev ++/Omicron/src/map.h
+matrix.h
+/home/tux/Dev ++/Omicron/src/matrix.h
+noise.h
+/home/tux/Dev ++/Omicron/src/noise.h
+parser.h
+/home/tux/Dev ++/Omicron/src/parser.h
+player.h
+/home/tux/Dev ++/Omicron/src/player.h
+rendering.h
+/home/tux/Dev ++/Omicron/src/rendering.h
+sign.h
+/home/tux/Dev ++/Omicron/src/sign.h
+state.h
+/home/tux/Dev ++/Omicron/src/state.h
+tinycthread.h
+/home/tux/Dev ++/Omicron/src/tinycthread.h
+util.h
+/home/tux/Dev ++/Omicron/src/util.h
+worldgen/world.h
+/home/tux/Dev ++/Omicron/src/worldgen/world.h
+
+/home/tux/Dev ++/Omicron/src/map.c
+stdlib.h
+-
+string.h
+-
+map.h
+/home/tux/Dev ++/Omicron/src/map.h
+
+/home/tux/Dev ++/Omicron/src/map.h
+
+/home/tux/Dev ++/Omicron/src/matrix.c
+math.h
+-
+config.h
+/home/tux/Dev ++/Omicron/src/config.h
+matrix.h
+/home/tux/Dev ++/Omicron/src/matrix.h
+util.h
+/home/tux/Dev ++/Omicron/src/util.h
+
+/home/tux/Dev ++/Omicron/src/matrix.h
+
+/home/tux/Dev ++/Omicron/src/parser.c
+parser.h
+/home/tux/Dev ++/Omicron/src/parser.h
+stdio.h
+-
+stdbool.h
+-
+stdlib.h
+-
+string.h
+-
+item.h
+/home/tux/Dev ++/Omicron/src/item.h
+
+/home/tux/Dev ++/Omicron/src/parser.h
+
+/home/tux/Dev ++/Omicron/src/player.h
+state.h
+/home/tux/Dev ++/Omicron/src/state.h
+
+/home/tux/Dev ++/Omicron/src/rendering.c
+rendering.h
+/home/tux/Dev ++/Omicron/src/rendering.h
+string.h
+-
+cube.h
+/home/tux/Dev ++/Omicron/src/cube.h
+matrix.h
+/home/tux/Dev ++/Omicron/src/matrix.h
+util.h
+/home/tux/Dev ++/Omicron/src/util.h
+
+/home/tux/Dev ++/Omicron/src/rendering.h
+GL/glew.h
+-
+attrib.h
+/home/tux/Dev ++/Omicron/src/attrib.h
+chunk.h
+/home/tux/Dev ++/Omicron/src/chunk.h
+player.h
+/home/tux/Dev ++/Omicron/src/player.h
+
+/home/tux/Dev ++/Omicron/src/ring.c
+stdlib.h
+-
+string.h
+-
+ring.h
+/home/tux/Dev ++/Omicron/src/ring.h
+
+/home/tux/Dev ++/Omicron/src/ring.h
+
+/home/tux/Dev ++/Omicron/src/sign.c
+stdlib.h
+-
+string.h
+-
+sign.h
+/home/tux/Dev ++/Omicron/src/sign.h
+
+/home/tux/Dev ++/Omicron/src/sign.h
+
+/home/tux/Dev ++/Omicron/src/state.h
+
+/home/tux/Dev ++/Omicron/src/util.c
+math.h
+-
+stdio.h
+-
+stdlib.h
+-
+errno.h
+-
+cube.h
+/home/tux/Dev ++/Omicron/src/cube.h
+lodepng.h
+/home/tux/Dev ++/Omicron/src/lodepng.h
+matrix.h
+/home/tux/Dev ++/Omicron/src/matrix.h
+util.h
+/home/tux/Dev ++/Omicron/src/util.h
+
+/home/tux/Dev ++/Omicron/src/util.h
+GL/glew.h
+-
+GLFW/glfw3.h
+-
+config.h
+/home/tux/Dev ++/Omicron/src/config.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/base_terrain.c
+base_terrain.h
+/home/tux/Dev ++/Omicron/src/worldgen/base_terrain.h
+noise.h
+/home/tux/Dev ++/Omicron/src/worldgen/noise.h
+../config.h
+/home/tux/Dev ++/Omicron/src/config.h
+../item.h
+/home/tux/Dev ++/Omicron/src/item.h
+../util.h
+/home/tux/Dev ++/Omicron/src/util.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/base_terrain.h
+world.h
+/home/tux/Dev ++/Omicron/src/worldgen/world.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/biome_desert.c
+biome_desert.h
+/home/tux/Dev ++/Omicron/src/worldgen/biome_desert.h
+noise.h
+/home/tux/Dev ++/Omicron/src/worldgen/noise.h
+../config.h
+/home/tux/Dev ++/Omicron/src/config.h
+../item.h
+/home/tux/Dev ++/Omicron/src/item.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/biome_desert.h
+world.h
+/home/tux/Dev ++/Omicron/src/worldgen/world.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/biome_mesa.c
+biome_mesa.h
+/home/tux/Dev ++/Omicron/src/worldgen/biome_mesa.h
+noise.h
+/home/tux/Dev ++/Omicron/src/worldgen/noise.h
+../config.h
+/home/tux/Dev ++/Omicron/src/config.h
+../item.h
+/home/tux/Dev ++/Omicron/src/item.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/biome_mesa.h
+world.h
+/home/tux/Dev ++/Omicron/src/worldgen/world.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/biome_rainforest.c
+biome_rainforest.h
+/home/tux/Dev ++/Omicron/src/worldgen/biome_rainforest.h
+noise.h
+/home/tux/Dev ++/Omicron/src/worldgen/noise.h
+../config.h
+/home/tux/Dev ++/Omicron/src/config.h
+../item.h
+/home/tux/Dev ++/Omicron/src/item.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/biome_rainforest.h
+world.h
+/home/tux/Dev ++/Omicron/src/worldgen/world.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/biome_taiga.c
+biome_taiga.h
+/home/tux/Dev ++/Omicron/src/worldgen/biome_taiga.h
+noise.h
+/home/tux/Dev ++/Omicron/src/worldgen/noise.h
+../config.h
+/home/tux/Dev ++/Omicron/src/config.h
+../item.h
+/home/tux/Dev ++/Omicron/src/item.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/biome_taiga.h
+world.h
+/home/tux/Dev ++/Omicron/src/worldgen/world.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/biome_temperate.c
+biome_temperate.h
+/home/tux/Dev ++/Omicron/src/worldgen/biome_temperate.h
+noise.h
+/home/tux/Dev ++/Omicron/src/worldgen/noise.h
+../config.h
+/home/tux/Dev ++/Omicron/src/config.h
+../item.h
+/home/tux/Dev ++/Omicron/src/item.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/biome_temperate.h
+world.h
+/home/tux/Dev ++/Omicron/src/worldgen/world.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/world.c
+../config.h
+/home/tux/Dev ++/Omicron/src/config.h
+../item.h
+/home/tux/Dev ++/Omicron/src/item.h
+noise.h
+/home/tux/Dev ++/Omicron/src/worldgen/noise.h
+../util.h
+/home/tux/Dev ++/Omicron/src/util.h
+world.h
+/home/tux/Dev ++/Omicron/src/worldgen/world.h
+base_terrain.h
+/home/tux/Dev ++/Omicron/src/worldgen/base_terrain.h
+biome_temperate.h
+/home/tux/Dev ++/Omicron/src/worldgen/biome_temperate.h
+biome_desert.h
+/home/tux/Dev ++/Omicron/src/worldgen/biome_desert.h
+biome_rainforest.h
+/home/tux/Dev ++/Omicron/src/worldgen/biome_rainforest.h
+biome_taiga.h
+/home/tux/Dev ++/Omicron/src/worldgen/biome_taiga.h
+biome_mesa.h
+/home/tux/Dev ++/Omicron/src/worldgen/biome_mesa.h
+math.h
+-
+
+/home/tux/Dev ++/Omicron/src/worldgen/world.h
+
+/usr/include/x86_64-linux-gnu/asm/ioctls.h
+asm-generic/ioctls.h
+-
+
+/usr/include/x86_64-linux-gnu/asm/socket.h
+asm-generic/socket.h
+-
+
+/usr/include/x86_64-linux-gnu/bits/ioctl-types.h
+asm/ioctls.h
+-
+
+/usr/include/x86_64-linux-gnu/bits/ioctls.h
+asm/ioctls.h
+-
+
+/usr/include/x86_64-linux-gnu/bits/mman-linux.h
+
+/usr/include/x86_64-linux-gnu/bits/mman.h
+bits/mman-linux.h
+-
+
+/usr/include/x86_64-linux-gnu/bits/param.h
+linux/limits.h
+-
+linux/param.h
+-
+
+/usr/include/x86_64-linux-gnu/bits/poll.h
+
+/usr/include/x86_64-linux-gnu/bits/poll2.h
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h
+bits/wordsize.h
+-
+
+/usr/include/x86_64-linux-gnu/bits/select.h
+bits/wordsize.h
+-
+
+/usr/include/x86_64-linux-gnu/bits/select2.h
+
+/usr/include/x86_64-linux-gnu/bits/sigset.h
+
+/usr/include/x86_64-linux-gnu/bits/sockaddr.h
+
+/usr/include/x86_64-linux-gnu/bits/socket.h
+stddef.h
+-
+sys/types.h
+-
+bits/socket_type.h
+-
+bits/sockaddr.h
+-
+asm/socket.h
+-
+
+/usr/include/x86_64-linux-gnu/bits/socket2.h
+
+/usr/include/x86_64-linux-gnu/bits/socket_type.h
+
+/usr/include/x86_64-linux-gnu/bits/stat.h
+
+/usr/include/x86_64-linux-gnu/bits/statvfs.h
+bits/types.h
+-
+
+/usr/include/x86_64-linux-gnu/bits/sysctl.h
+
+/usr/include/x86_64-linux-gnu/bits/time.h
+bits/types.h
+-
+bits/types.h
+-
+bits/timex.h
+-
+
+/usr/include/x86_64-linux-gnu/bits/timex.h
+bits/types.h
+-
+
+/usr/include/x86_64-linux-gnu/bits/types.h
+features.h
+-
+bits/wordsize.h
+-
+bits/typesizes.h
+-
+
+/usr/include/x86_64-linux-gnu/bits/typesizes.h
+
+/usr/include/x86_64-linux-gnu/bits/uio.h
+sys/types.h
+-
+
+/usr/include/x86_64-linux-gnu/bits/wordsize.h
+
+/usr/include/x86_64-linux-gnu/curl/curl.h
+curlver.h
+/usr/include/x86_64-linux-gnu/curl/curlver.h
+curlbuild.h
+/usr/include/x86_64-linux-gnu/curl/curlbuild.h
+curlrules.h
+/usr/include/x86_64-linux-gnu/curl/curlrules.h
+stdio.h
+-
+limits.h
+-
+osreldate.h
+-
+sys/types.h
+-
+time.h
+-
+winsock2.h
+-
+ws2tcpip.h
+-
+sys/select.h
+-
+sys/socket.h
+-
+sys/time.h
+-
+support/SupportDefs.h
+-
+easy.h
+/usr/include/x86_64-linux-gnu/curl/easy.h
+multi.h
+/usr/include/x86_64-linux-gnu/curl/multi.h
+typecheck-gcc.h
+/usr/include/x86_64-linux-gnu/curl/typecheck-gcc.h
+
+/usr/include/x86_64-linux-gnu/curl/curlbuild.h
+windows.h
+-
+winsock2.h
+-
+ws2tcpip.h
+-
+sys/types.h
+-
+stdint.h
+-
+inttypes.h
+-
+sys/socket.h
+-
+sys/poll.h
+-
+
+/usr/include/x86_64-linux-gnu/curl/curlrules.h
+
+/usr/include/x86_64-linux-gnu/curl/curlver.h
+
+/usr/include/x86_64-linux-gnu/curl/easy.h
+
+/usr/include/x86_64-linux-gnu/curl/multi.h
+curl.h
+/usr/include/x86_64-linux-gnu/curl/curl.h
+
+/usr/include/x86_64-linux-gnu/curl/typecheck-gcc.h
+
+/usr/include/x86_64-linux-gnu/sys/file.h
+features.h
+-
+fcntl.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/ioctl.h
+features.h
+-
+bits/ioctls.h
+-
+bits/ioctl-types.h
+-
+sys/ttydefaults.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/mman.h
+features.h
+-
+bits/types.h
+-
+stddef.h
+-
+bits/mman.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/mount.h
+features.h
+-
+sys/ioctl.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/param.h
+stddef.h
+-
+sys/types.h
+-
+limits.h
+-
+endian.h
+-
+signal.h
+-
+bits/param.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/poll.h
+features.h
+-
+bits/poll.h
+-
+bits/sigset.h
+-
+time.h
+-
+bits/poll2.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/select.h
+features.h
+-
+bits/types.h
+-
+bits/select.h
+-
+bits/sigset.h
+-
+time.h
+-
+bits/time.h
+-
+bits/select2.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/socket.h
+features.h
+-
+sys/uio.h
+-
+stddef.h
+-
+bits/sigset.h
+-
+bits/socket.h
+-
+bits/socket2.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/stat.h
+features.h
+-
+bits/types.h
+-
+time.h
+-
+bits/stat.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/statvfs.h
+features.h
+-
+bits/statvfs.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/sysctl.h
+features.h
+-
+stddef.h
+-
+linux/sysctl.h
+-
+bits/sysctl.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/sysmacros.h
+features.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/time.h
+features.h
+-
+bits/types.h
+-
+time.h
+-
+bits/time.h
+-
+sys/select.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/timeb.h
+features.h
+-
+time.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/ttydefaults.h
+
+/usr/include/x86_64-linux-gnu/sys/types.h
+features.h
+-
+bits/types.h
+-
+time.h
+-
+stddef.h
+-
+endian.h
+-
+sys/select.h
+-
+sys/sysmacros.h
+-
+bits/pthreadtypes.h
+-
+
+/usr/include/x86_64-linux-gnu/sys/uio.h
+features.h
+-
+sys/types.h
+-
+bits/uio.h
+-
+
+deps/glew/include/GL/glew.h
+stddef.h
+-
+inttypes.h
+-
+stdint.h
+-
+inttypes.h
+-
+OpenGL/glu.h
+-
+GL/glu.h
+-
+
+deps/glew/include/GL/glxew.h
+X11/Xlib.h
+-
+X11/Xutil.h
+-
+X11/Xmd.h
+-
+GL/glew.h
+-
+
+deps/glew/include/GL/wglew.h
+windows.h
+-
+
+deps/glfw/include/GLFW/glfw3.h
+stddef.h
+-
+OpenGL/gl3.h
+-
+OpenGL/gl3ext.h
+-
+OpenGL/gl.h
+-
+OpenGL/glu.h
+-
+GL/glcorearb.h
+-
+GLES/gl.h
+-
+GLES/glext.h
+-
+GLES2/gl2.h
+-
+GLES2/gl2ext.h
+-
+GLES3/gl3.h
+-
+GLES3/gl2ext.h
+-
+GLES3/gl31.h
+-
+GLES3/gl2ext.h
+-
+GL/gl.h
+-
+GL/glext.h
+-
+GL/glu.h
+-
+
+deps/lodepng/lodepng.h
+string.h
+-
+vector
+-
+string
+-
+lodepng.h
+deps/lodepng/lodepng.h
+iostream
+-
+lodepng.h
+deps/lodepng/lodepng.h
+
+deps/noise/noise.h
+
+deps/sqlite/sqlite3.h
+stdarg.h
+-
+
+deps/tinycthread/tinycthread.h
+time.h
+-
+pthread.h
+-
+windows.h
+-
+

@@ -1,0 +1,110 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/tux/Dev ++/CraftNG-master/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_9b6c0/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9b6c0.dir/build.make CMakeFiles/cmTC_9b6c0.dir/build
+make[1] : on entre dans le répertoire « /home/tux/Dev ++/CraftNG-master/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_9b6c0.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_9b6c0.dir/CheckSymbolExists.c.o   -c "/home/tux/Dev ++/CraftNG-master/CMakeFiles/CMakeTmp/CheckSymbolExists.c"
+Linking C executable cmTC_9b6c0
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9b6c0.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_9b6c0.dir/CheckSymbolExists.c.o  -o cmTC_9b6c0 -rdynamic 
+CMakeFiles/cmTC_9b6c0.dir/CheckSymbolExists.c.o : Dans la fonction « main » :
+CheckSymbolExists.c:(.text+0x1b) : référence indéfinie vers « pthread_create »
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_9b6c0.dir/build.make:97 : la recette pour la cible « cmTC_9b6c0 » a échouée
+make[1]: *** [cmTC_9b6c0] Erreur 1
+make[1] : on quitte le répertoire « /home/tux/Dev ++/CraftNG-master/CMakeFiles/CMakeTmp »
+Makefile:126 : la recette pour la cible « cmTC_9b6c0/fast » a échouée
+make: *** [cmTC_9b6c0/fast] Erreur 2
+
+File /home/tux/Dev ++/CraftNG-master/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/tux/Dev ++/CraftNG-master/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_e922f/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e922f.dir/build.make CMakeFiles/cmTC_e922f.dir/build
+make[1] : on entre dans le répertoire « /home/tux/Dev ++/CraftNG-master/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_e922f.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_e922f.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.7/Modules/CheckFunctionExists.c
+Linking C executable cmTC_e922f
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e922f.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_e922f.dir/CheckFunctionExists.c.o  -o cmTC_e922f -rdynamic -lpthreads 
+/usr/bin/ld : ne peut trouver -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_e922f.dir/build.make:97 : la recette pour la cible « cmTC_e922f » a échouée
+make[1]: *** [cmTC_e922f] Erreur 1
+make[1] : on quitte le répertoire « /home/tux/Dev ++/CraftNG-master/CMakeFiles/CMakeTmp »
+Makefile:126 : la recette pour la cible « cmTC_e922f/fast » a échouée
+make: *** [cmTC_e922f/fast] Erreur 2
+
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/tux/Dev ++/Omicron/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_bc984/fast"
+/usr/bin/make -f CMakeFiles/cmTC_bc984.dir/build.make CMakeFiles/cmTC_bc984.dir/build
+make[1] : on entre dans le répertoire « /home/tux/Dev ++/Omicron/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_bc984.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_bc984.dir/CheckSymbolExists.c.o   -c "/home/tux/Dev ++/Omicron/CMakeFiles/CMakeTmp/CheckSymbolExists.c"
+Linking C executable cmTC_bc984
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bc984.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_bc984.dir/CheckSymbolExists.c.o  -o cmTC_bc984 -rdynamic 
+CMakeFiles/cmTC_bc984.dir/CheckSymbolExists.c.o : Dans la fonction « main » :
+CheckSymbolExists.c:(.text+0x1b) : référence indéfinie vers « pthread_create »
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_bc984.dir/build.make:97 : la recette pour la cible « cmTC_bc984 » a échouée
+make[1]: *** [cmTC_bc984] Erreur 1
+make[1] : on quitte le répertoire « /home/tux/Dev ++/Omicron/CMakeFiles/CMakeTmp »
+Makefile:126 : la recette pour la cible « cmTC_bc984/fast » a échouée
+make: *** [cmTC_bc984/fast] Erreur 2
+
+File /home/tux/Dev ++/Omicron/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/tux/Dev ++/Omicron/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_d5f22/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d5f22.dir/build.make CMakeFiles/cmTC_d5f22.dir/build
+make[1] : on entre dans le répertoire « /home/tux/Dev ++/Omicron/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_d5f22.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_d5f22.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.7/Modules/CheckFunctionExists.c
+Linking C executable cmTC_d5f22
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d5f22.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_d5f22.dir/CheckFunctionExists.c.o  -o cmTC_d5f22 -rdynamic -lpthreads 
+/usr/bin/ld : ne peut trouver -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d5f22.dir/build.make:97 : la recette pour la cible « cmTC_d5f22 » a échouée
+make[1]: *** [cmTC_d5f22] Erreur 1
+make[1] : on quitte le répertoire « /home/tux/Dev ++/Omicron/CMakeFiles/CMakeTmp »
+Makefile:126 : la recette pour la cible « cmTC_d5f22/fast » a échouée
+make: *** [cmTC_d5f22/fast] Erreur 2
+
+
