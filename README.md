@@ -72,7 +72,7 @@ terminal in the dowloaded source directory. Run the following commands :
 
     cmake .
     make
-    ./craft
+    ./omicron
 
 ### Multiplayer
 
