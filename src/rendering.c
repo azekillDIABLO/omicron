@@ -146,7 +146,7 @@ void draw_player(Attrib *attrib, Player *player) {
 GLuint gen_crosshair_buffer(int width, int height, int scale) {
     int x = width / 2;
     int y = height / 2;
-    int p = 10 * scale;
+    int p = 11 * scale;
     float data[] = {
         x, y - p, x, y + p,
         x - p, y, x + p, y

@@ -27,6 +27,14 @@ void generateTemperate(int dx, int dz, int x, int z, int start_h, int h, int fla
 			func(x, h, z, w * flag, arg);
 		}
     }
+    
+    // rocks
+    if (simplex2(x * 0.02, -z * 0.02, 4, 0.8, 2) > 0.75) {
+        if (h > 72) {
+			func(x, h-1, z, Item_STONE * flag, arg);
+			func(x, h, z, Item_STONE * flag, arg);
+		}
+    }
 
     // trees
     if (h > 38) {
@@ -50,6 +58,33 @@ void generateTemperate(int dx, int dz, int x, int z, int start_h, int h, int fla
 				}
 			}
 			for (int y = h; y < h + 7; y++) {		
+				func(x, y, z, 5, arg);
+			}
+		}
+	}
+	
+	// elder trees
+    if (h > 38) {
+		int ok = 1;
+		if (dx - 4 < 0 || dz - 4 < 0 ||
+			dx + 4 >= CHUNK_SIZE || dz + 4 >= CHUNK_SIZE)
+		{
+			ok = 0;
+		}
+
+		if (ok && simplex2(x, z, 7, 0.6, 2) > 0.85) {
+			for (int y = h + 4; y < h + 18; y++) {
+				for (int ox = -4; ox <= 4; ox++) {
+					for (int oz = -4; oz <= 4; oz++) {
+						int d = (ox * ox) + (oz * oz) +
+							(y - (h + 6)) * (y - (h + 6));
+						if (d < 18) {
+							func(x + ox, y, z + oz, 15, arg);
+						}
+					}
+				}
+			}
+			for (int y = h; y < h + 10; y++) {		
 				func(x, y, z, 5, arg);
 			}
 		}

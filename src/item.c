@@ -6,6 +6,7 @@ const int items[] = {
     Item_GRASS,
     Item_SAND,
     Item_STONEBRICK,
+    Item_SLAB_LOWER_STONEBRICK,
     Item_BRICK,
     Item_WOOD,
     Item_STONE,
@@ -23,7 +24,10 @@ const int items[] = {
     Item_WATER,
     Item_CACTUS,
     Item_PLAYER,
-    Item_SLAB_LOWER_STONEBRICK,
+    Item_COAL_ORE,
+	Item_IRON_ORE,
+	Item_GOLD_ORE,
+	Item_RUBIS_ORE,
     
     //Flowers
     Item_TALL_GRASS,
@@ -151,8 +155,12 @@ const int blocks[256][6] = {
     {0, 0, 0, 0, 0, 0}, // 66
     {0, 0, 0, 0, 0, 0}, // 67
     {2, 2, 2, 2, 2, 2}, // 68 - stonebrick slab
-    {255, 255, 211, 255, 255, 255}, // 69 - water
+    {211, 211, 211, 211, 211, 211}, // 69 - water
     {212, 212, 212, 212, 212, 212}, // 70 - core shell
+    {64, 64, 64, 64, 64, 64}, // 71 - coal ore
+    {65, 65, 65, 65, 65, 65}, // 72 - iron ore
+    {66, 66, 66, 66, 66, 66}, // 73 - gold ore
+    {67, 67, 67, 67, 67, 67}, // 74 - rubis ore
     {0, 0, 0, 0, 0, 0} // 71 - empty
 };
 
@@ -227,7 +235,7 @@ int is_transparent(int w) {
         case Item_EMPTY:
         case Item_GLASS:
         //case Item_LEAVES: for better performance (8 fps -> 60fps OPTIMIZATION NEEDED!) 
-        case Item_WATER: //Just to stop Xray-ing :D
+        case Item_WATER: //Just to stop Xray-ing
             return 1;
         default:
             return 0;
@@ -239,7 +247,7 @@ int is_destructable(int w) {
         case Item_EMPTY:
         case Item_CLOUD:
         case Item_CORESHELL:
-        //case Item_WATER
+        case Item_WATER:
             return 0;
         default:
             return 1;
@@ -249,6 +257,16 @@ int is_destructable(int w) {
 int buildable_to(int w) {
     switch (w) {
         case Item_WATER:
+        case Item_CLOUD:
+        case Item_TALL_GRASS:
+        case Item_YELLOW_FLOWER:
+        case Item_RED_FLOWER:
+        case Item_PURPLE_FLOWER:
+        case Item_SUN_FLOWER:
+        case Item_WHITE_FLOWER:
+        case Item_BLUE_FLOWER:
+        case Item_VINE:
+        case Item_CACTI:
             return 0;
         default:
             return 1;
@@ -258,7 +276,6 @@ int buildable_to(int w) {
 int is_climbable(int w) {
     switch(w) {
         case Item_VINE:
-        //case Item_WATER:
             return 1;
         default:
             return 0;

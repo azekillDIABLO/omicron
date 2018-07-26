@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+//#include <gtk.h>
 #include "attrib.h"
 #include "auth.h"
 #include "chunk.h"
@@ -835,6 +836,7 @@ void compute_chunk(WorkerItem *item) {
                 int y = ey - oy;
                 int z = ez - oz;
                 int w = ew;
+				
                 // TODO: this should be unnecessary
                 if (x < 0 || y < 0 || z < 0) {
                     continue;
@@ -847,6 +849,35 @@ void compute_chunk(WorkerItem *item) {
                 if (opaque[XYZ(x, y, z)]) {
                     highest[XZ(x, z)] = MAX(highest[XZ(x, z)], y);
                 }
+                
+                /*
+                if (!is_transparent(w)) {
+					
+					if (!opaque[XYZ(x, y + 1, z)]) {
+						opaque[XYZ(x, y + 1, z)];
+					}
+
+					if (!opaque[XYZ(x, y - 1, z)] && (ey > 0)) {
+						opaque[XYZ(x, y - 1, z)];
+					}
+					
+					if (!opaque[XYZ(x + 1, y, z)]){
+						opaque[XYZ(x + 1, y, z)];
+					}
+					
+					if (!opaque[XYZ(x - 1, y, z)]){
+						opaque[XYZ(x - 1, y, z)];
+					}
+					
+					if (!opaque[XYZ(x, y, z + 1)]){
+						opaque[XYZ(x, y, z + 1)];
+					}
+					
+					if (!opaque[XYZ(x, y, z - 1)]){
+						opaque[XYZ(x, y, z - 1)];
+					}	
+				}
+				*/
             } END_MAP_FOR_EACH;
         }
     }
@@ -2011,31 +2042,36 @@ void on_left_click() {
     State *s = &g->players->state;
     int hx, hy, hz;
     int hw = hit_test(0, s->x, s->y, s->z, s->rx, s->ry, &hx, &hy, &hz);
-    if (hy > 0 && hy < BUILD_HEIGHT_LIMIT && is_destructable(hw) && Inventory_collect(&g->inventory, hw)) {
-        set_block(hx, hy, hz, 0);
-        record_block(hx, hy, hz, 0);
-        if (is_plant(get_block(hx, hy + 1, hz))) {
-            set_block(hx, hy + 1, hz, 0);
-        }
-    }
+    int mining = 1;
+	//while (mining = 1) {
+		if (hy > 0 && hy < BUILD_HEIGHT_LIMIT && is_destructable(hw) && Inventory_collect(&g->inventory, hw)) {
+			set_block(hx, hy, hz, 0);
+			record_block(hx, hy, hz, 0);
+			if (is_plant(get_block(hx, hy + 1, hz))) {
+				set_block(hx, hy + 1, hz, 0);
+			}
+		}
+	//}
 }
 
 void on_right_click() {
     State *s = &g->players->state;
     int hx, hy, hz;
     int hw = hit_test(1, s->x, s->y, s->z, s->rx, s->ry, &hx, &hy, &hz);
+    
+    int nx, ny, nz;
+	int hwb = hit_test(0, s->x, s->y, s->z, s->rx, s->ry, &nx, &ny, &nz);
+    
     if (hy > 0 && hy < BUILD_HEIGHT_LIMIT && is_obstacle(hw) && Inventory_use(&g->inventory, items[g->item_index])) {
         if (!player_intersects_block(2, s->x, s->y, s->z, hx, hy, hz)) {
             set_block(hx, hy, hz, items[g->item_index]);
             record_block(hx, hy, hz, items[g->item_index]);
         }
-    }
- 
-	if (hy > 0 && hy < BUILD_HEIGHT_LIMIT && !buildable_to(hw) && Inventory_use(&g->inventory, items[g->item_index])) {
-        if (!player_intersects_block(2, s->x, s->y, s->z, hx, hy, hz)) {
-            set_block(hx, hy-1, hz, items[g->item_index]);
-            record_block(hx, hy-1, hz, items[g->item_index]);
-        }
+    } else if (ny > 0 && ny < BUILD_HEIGHT_LIMIT && !buildable_to(hwb) && Inventory_use(&g->inventory, items[g->item_index])) {
+		if (!player_intersects_block(2, s->x, s->y, s->z, hx, hy, hz)) {	
+			set_block(nx, ny, nz, items[g->item_index]);
+			record_block(hx, hy, hz, items[g->item_index]);
+		}
     }
 }
 
@@ -2731,7 +2767,6 @@ int main(int argc, char **argv) {
             s->y = highest_block(s->x, s->z) + 2;
         }
 
-
         // BEGIN MAIN LOOP //
         double previous = glfwGetTime();
         while (1) {
@@ -2763,12 +2798,6 @@ int main(int argc, char **argv) {
             handle_mouse_input();
             
             
-		// ######## //
-		// Add gui? //
-		// ######## //
-
-		//render_text(&text_attrib, ALIGN_RIGHT, tx, ty, ts, "Omicron", g->width, g->height);
-
             // HANDLE MOVEMENT //
             handle_movement(dt);
 
@@ -2922,7 +2951,7 @@ int main(int argc, char **argv) {
         }
 
         // SHUTDOWN //
-        printf("Omicron: Game closing ...");
+        printf("\nOmicron: Game closing ... \n");
         db_save_state(s->x, s->y, s->z, s->rx, s->ry);
         db_close();
         db_disable();

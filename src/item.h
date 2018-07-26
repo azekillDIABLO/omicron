@@ -65,6 +65,10 @@ typedef enum {
     Item_SLAB_LOWER_STONEBRICK,
     Item_WATER,
     Item_CORESHELL,
+    Item_COAL_ORE,
+    Item_IRON_ORE,
+    Item_GOLD_ORE,
+    Item_RUBIS_ORE,
     Item_max
 } Item;
 

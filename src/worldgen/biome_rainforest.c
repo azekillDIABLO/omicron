@@ -10,7 +10,7 @@ void generateRainforest(int dx, int dz, int x, int z, int start_h, int h, int fl
     func(x, h - 1, z, Item_GRASS * flag, arg);
 
     // grass
-    if (simplex2(-x * 0.1, z * 0.1, 4, 0.8, 2) > 0.4) {
+    if (simplex2(-x * 0.1, z * 0.1, 4, 0.8, 2) > 0.5) {
         func(x, h, z, 17 * flag, arg);
     }
     // flowers

@@ -451,6 +451,10 @@ config.h
 /home/tux/Dev ++/Omicron/src/config.h
 
 /home/tux/Dev ++/Omicron/src/worldgen/base_terrain.c
+stdio.h
+-
+stdlib.h
+-
 base_terrain.h
 /home/tux/Dev ++/Omicron/src/worldgen/base_terrain.h
 noise.h

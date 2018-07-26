@@ -116,10 +116,12 @@ void make_cube(
     int wbottom = blocks[w][3];
     int wfront = blocks[w][4];
     int wback = blocks[w][5];
+
     make_cube_faces(
         data, ao, light,
         left, right, top, bottom, front, back,
         wleft, wright, wtop, wbottom, wfront, wback,
+        //left, right, top, bottom, front, back,
         x, y, z, n, noncube_type(w));
 }
 

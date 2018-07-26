@@ -7,6 +7,7 @@
 
 typedef struct {
     int id;
+    int hp;
     char name[MAX_NAME_LENGTH];
     State state;
     State state1;

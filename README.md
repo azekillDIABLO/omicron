@@ -1,4 +1,6 @@
-## Omicron by azekill_DIABLO
+## Omicron by azekill_DIABLO > pre-release 0.2
+
+This game is a voxelly sandbox-game with procedurally generated world!
 
 Fork of CraftNG by Twetzel59 which is also a Fork of Michael Fogleman's Minecraft clone for Windows, Mac OS X and Linux.
 
@@ -29,7 +31,7 @@ Linux release : *<link here>*
 ### Running the game
 
 Mac and Windows: Click on the executable file, the game should run.
-Linux: Open terminal in the directory of the game and type ./omicron`
+Linux: Open terminal in the directory of the game and type `./omicron`
 
 
 See below to run from source.
@@ -42,15 +44,15 @@ Download and install [CMake](http://www.cmake.org/cmake/resources/software.html)
 if you don't already have it. You may use [Homebrew](http://brew.sh) to simplify
 the installation:
 
-    brew install cmake
+    `brew install cmake`
 
 #### Linux (Ubuntu)
 
-    sudo apt-get install cmake libglew-dev xorg-dev libcurl4-openssl-dev
-    sudo apt-get build-dep glfw
+    `sudo apt-get install cmake libglew-dev xorg-dev libcurl4-openssl-dev
+    sudo apt-get build-dep glfw`
     
-	*Under debian (tested under AntiX) it seems you need to run each install
-	of the first line separately in order to install without errors.*
+*Under debian (tested under AntiX) it seems you need to run each install
+of the first line separately in order to install without errors.*
 
 #### Windows
 
@@ -62,17 +64,17 @@ CURL/lib and CURL/include are in your Program Files directory.
 
 Use the following commands in place of the ones described in the next section.
 
-    cmake -G "MinGW Makefiles"
-    mingw32-make
+    `cmake -G "MinGW Makefiles"
+    mingw32-make`
 
 ### Compile and Run
 
 Once you have the dependencies (see above), install the sources and open the
 terminal in the dowloaded source directory. Run the following commands :
 
-    cmake .
+    `cmake .
     make
-    ./omicron
+    ./craft`
 
 ### Multiplayer
 

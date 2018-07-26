@@ -1,61 +1,42 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include "base_terrain.h"
 #include "noise.h"
 #include "../config.h"
 #include "../item.h"
 #include "../util.h"
 
-
-const int caveitems[] = {
-    // items that caves can "dig" trough (Unused)
-    Item_GRASS,
-    Item_SAND,
-    Item_WOOD,
-    Item_STONE,
-    Item_DIRT,
-    Item_SNOW,
-    Item_LEAVES,
-    Item_CACTUS,
-    Item_TALL_GRASS,
-    Item_YELLOW_FLOWER,
-    Item_RED_FLOWER,
-    Item_PURPLE_FLOWER,
-    Item_SUN_FLOWER,
-    Item_WHITE_FLOWER,
-    Item_BLUE_FLOWER,
-    Item_VINE,
-    Item_CACTI
-};
-
-
 void generateBaseTerrain(int dx, int dz, int x, int z, int start_h, int h, int flag, world_func func, void *arg) {
     for(int y = start_h; y < h; y++) {
 		
-        //-- ugly caves
-        
-        //float cave1 = simplex3(x, y, z, 8, 1.8, 1.5);
-        //float cave2 = simplex3(x, y, z, 12, 2.8, 0.5);
-        //float cave1 = simplex2(x, y + 1, 3, 0.8, 0.5);
-        //float cave2 = simplex2(x + 1, y, 3, 0.8, 0.5);
-
-        //if(ABS(cave1 - cave2) < 0.1) {
-        //    func(x, y, z, Item_STONE, arg);
-        //}
-        
-        //-- ugly caves
-
-
-		// small caves
-        if ((y < 2 || y > 36) || (simplex3(x * 0.05, y * 0.05, z * 0.05, 16, 0.05, 5)
-            + simplex3(x * 0.05, y * 0.05, z * 0.05, 16, 0.05, 5) < 1.25)) {
-            func(x, y, z, Item_STONE, arg);
+		for (int y = 1; y < 34; y++) {
+			func(x, y, z, Item_STONE, arg);
         }
         
-        // big caves
-      //   if ((y < 2 || y > h - 5) || (simplex3(x * 0.005, y * 0.05, z * 0.005, 15, 0.1, 5)
-      //      + simplex3(x * 0.005, y * 0.05, z * 0.005, 20, 0.05, 1) < 1.25)) {
-      //      func(x, y, z, Item_STONE, arg);
-      //}
+        // Ores generation system 
         
-        
+        for (int y = 2; y < 30; y++) {
+			if (simplex3(x * 0.12, y * 0.12, z * 0.12, 6, 0.5, 2) > 0.74) {
+				int rand_num = (rand() % 100);
+				
+				if (y < 10 && rand_num < 15) {
+					func(x, y-1, z, Item_RUBIS_ORE * flag, arg);
+				} else if (y < 20 && rand_num < 30) {
+					func(x, y, z, Item_GOLD_ORE * flag, arg); 
+				} else if (y < 20 && rand_num < 65) {
+					func(x, y, z, Item_IRON_ORE * flag, arg); 
+				} else if (y < 30 && rand_num < 85) {
+					func(x, y, z, Item_COAL_ORE * flag, arg);
+				}
+			}
+		}
+            		
+		// Caves  
+		for (int y = 1; y < 38; y++) {
+			if (simplex3(
+						x * 0.06, y * 0.08, z * 0.06, 8, 0.3, 2) > 0.64) { 
+				func(x, y, z, 0 * flag, arg);
+			}
+		}     
     }
 }

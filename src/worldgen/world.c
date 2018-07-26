@@ -49,6 +49,7 @@ void create_world(int p, int q, world_func func, void *arg) {
             generateBaseTerrain(dx, dz, x, z, 0, 32, flag, func, arg);
             //generateBaseTerrain(dx, dz, x, z, 32, 32 + h, flag, func, arg);
 
+
             // clouds
             for (int y = 120; y < 200; y++) {
                 if (simplex3(
@@ -57,18 +58,33 @@ void create_world(int p, int q, world_func func, void *arg) {
                     func(x, y, z, 16 * flag, arg);
                 }
             }
-            
-            // Flying dirt patches
+
+            /* Flying dirt patches = bad idea
             for (int yb = 170; yb < 255; yb++) {
                 if (simplex3(
-                    x * 0.002, yb * 0.004, z * 0.002, 7, 0.5, 2) > 0.72)
+					x * 0.002, yb * 0.004, z * 0.002, 7, 0.5, 2) > 0.80)
                 {
-                    func(x, yb, z, Item_DIRT * flag, arg);
+                    //if (x > 100 && x < -100 && z > 100 && z < -100) {
+						func(x, yb, z, Item_DIRT * flag, arg);
+					//}
                 }
-            }
+            }*/
             
-            // Core shell
-            func(x, 1, z, Item_CORESHELL * flag, arg);
+            // Unbreakable Core shell
+            func(x, 0, z, Item_CORESHELL * flag, arg);
+            if (simplex2(
+					x * 0.5, z * 0.5, 7, 3, 5) > 0.6)
+                {
+				func(x, 1, z, Item_CORESHELL * flag, arg);
+			}
+			
+			
+			// Buildings
+			
+			// Brick Pyramid
+			//for (int b = 50; b < 100; b++) {
+			//	func(b, b, b, Item_BRICK * flag, arg);
+            //}
         }
     }
 }
