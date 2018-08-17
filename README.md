@@ -1,6 +1,4 @@
-## Omicron by azekill_DIABLO > pre-release 0.2
-
-This game is a voxelly sandbox-game with procedurally generated world!
+## Omicron by azekill_DIABLO
 
 Fork of CraftNG by Twetzel59 which is also a Fork of Michael Fogleman's Minecraft clone for Windows, Mac OS X and Linux.
 
@@ -13,14 +11,14 @@ https://github.com/twetzel59/CraftNG/
 ### Features
 
 * Simple but nice looking terrain generation using perlin / simplex noise.
-* Over 60 blocks and more can be added with ease.
+* Over 70 blocks and more can be added with ease.
 * Supports plants (grass, flowers, trees, cactus) and transparency (glass).
 * Simple fluffy clouds in the sky (they don't move... Yet!).
 * Day / night cycles and a textured sky dome.
 * World changes persisted in a sqlite3 database.
 * Multiplayer support! (Well. Needs server first.)
-* An horrendous water system. (Disabled by default for good reasons).
 * Various biomes. (Including the newly created Mesa-Biome!)
+* Lakes and Water caves
 
 
 ### Download
@@ -44,15 +42,15 @@ Download and install [CMake](http://www.cmake.org/cmake/resources/software.html)
 if you don't already have it. You may use [Homebrew](http://brew.sh) to simplify
 the installation:
 
-    `brew install cmake`
+    brew install cmake
 
 #### Linux (Ubuntu)
 
-    `sudo apt-get install cmake libglew-dev xorg-dev libcurl4-openssl-dev
-    sudo apt-get build-dep glfw`
+    sudo apt-get install cmake libglew-dev xorg-dev libcurl4-openssl-dev
+    sudo apt-get build-dep glfw
     
-*Under debian (tested under AntiX) it seems you need to run each install
-of the first line separately in order to install without errors.*
+	*Under debian (tested under AntiX) it seems you need to run each install
+	of the first line separately in order to install without errors.*
 
 #### Windows
 
@@ -64,17 +62,17 @@ CURL/lib and CURL/include are in your Program Files directory.
 
 Use the following commands in place of the ones described in the next section.
 
-    `cmake -G "MinGW Makefiles"
-    mingw32-make`
+    cmake -G "MinGW Makefiles"
+    mingw32-make
 
 ### Compile and Run
 
 Once you have the dependencies (see above), install the sources and open the
 terminal in the dowloaded source directory. Run the following commands :
 
-    `cmake .
+    cmake .
     make
-    ./craft`
+    ./omicron
 
 ### Multiplayer
 

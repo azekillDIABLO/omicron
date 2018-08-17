@@ -234,8 +234,8 @@ int is_transparent(int w) {
     switch (w) {
         case Item_EMPTY:
         case Item_GLASS:
-        //case Item_LEAVES: for better performance (8 fps -> 60fps OPTIMIZATION NEEDED!) 
-        case Item_WATER: //Just to stop Xray-ing
+        //case Item_LEAVES: //for better performance (8 fps -> 60fps OPTIMIZATION NEEDED!) 
+        //case Item_WATER: //Just to stop Xray-ing
             return 1;
         default:
             return 0;

@@ -247,6 +247,13 @@ CMakeFiles/omicron.dir/src/worldgen/biome_mesa.c.o: src/worldgen/biome_mesa.h
 CMakeFiles/omicron.dir/src/worldgen/biome_mesa.c.o: src/worldgen/world.h
 CMakeFiles/omicron.dir/src/worldgen/biome_mesa.c.o: deps/noise/noise.h
 
+CMakeFiles/omicron.dir/src/worldgen/biome_ocean.c.o: src/config.h
+CMakeFiles/omicron.dir/src/worldgen/biome_ocean.c.o: src/item.h
+CMakeFiles/omicron.dir/src/worldgen/biome_ocean.c.o: src/worldgen/biome_ocean.c
+CMakeFiles/omicron.dir/src/worldgen/biome_ocean.c.o: src/worldgen/biome_ocean.h
+CMakeFiles/omicron.dir/src/worldgen/biome_ocean.c.o: src/worldgen/world.h
+CMakeFiles/omicron.dir/src/worldgen/biome_ocean.c.o: deps/noise/noise.h
+
 CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o: src/config.h
 CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o: src/item.h
 CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o: src/worldgen/biome_rainforest.c

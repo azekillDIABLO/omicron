@@ -5,6 +5,8 @@
 
 void generateDesert(int dx, int dz, int x, int z, int start_h, int h, int flag, world_func func, void *arg) {  
 	for (int y = start_h; y < h; y++) {
+		//int y = y / 1;
+	
 		func(x, y, z, 2 * flag, arg);
 	}
 
@@ -17,7 +19,8 @@ void generateDesert(int dx, int dz, int x, int z, int start_h, int h, int flag, 
     if (simplex2(-x * 0.1, z * 0.1, 3, 0.9, 2) > 0.85) {
         func(x, h, z, 67 * flag, arg); 
     }
-
+    
+	// cactus
     int ok = 1;
     if (dx - 4 < 0 || dz - 4 < 0 ||
         dx + 4 >= CHUNK_SIZE || dz + 4 >= CHUNK_SIZE)

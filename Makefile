@@ -1075,6 +1075,33 @@ src/worldgen/biome_mesa.c.s:
 	$(MAKE) -f CMakeFiles/omicron.dir/build.make CMakeFiles/omicron.dir/src/worldgen/biome_mesa.c.s
 .PHONY : src/worldgen/biome_mesa.c.s
 
+src/worldgen/biome_ocean.o: src/worldgen/biome_ocean.c.o
+
+.PHONY : src/worldgen/biome_ocean.o
+
+# target to build an object file
+src/worldgen/biome_ocean.c.o:
+	$(MAKE) -f CMakeFiles/omicron.dir/build.make CMakeFiles/omicron.dir/src/worldgen/biome_ocean.c.o
+.PHONY : src/worldgen/biome_ocean.c.o
+
+src/worldgen/biome_ocean.i: src/worldgen/biome_ocean.c.i
+
+.PHONY : src/worldgen/biome_ocean.i
+
+# target to preprocess a source file
+src/worldgen/biome_ocean.c.i:
+	$(MAKE) -f CMakeFiles/omicron.dir/build.make CMakeFiles/omicron.dir/src/worldgen/biome_ocean.c.i
+.PHONY : src/worldgen/biome_ocean.c.i
+
+src/worldgen/biome_ocean.s: src/worldgen/biome_ocean.c.s
+
+.PHONY : src/worldgen/biome_ocean.s
+
+# target to generate assembly for a file
+src/worldgen/biome_ocean.c.s:
+	$(MAKE) -f CMakeFiles/omicron.dir/build.make CMakeFiles/omicron.dir/src/worldgen/biome_ocean.c.s
+.PHONY : src/worldgen/biome_ocean.c.s
+
 src/worldgen/biome_rainforest.o: src/worldgen/biome_rainforest.c.o
 
 .PHONY : src/worldgen/biome_rainforest.o
@@ -1286,6 +1313,9 @@ help:
 	@echo "... src/worldgen/biome_mesa.o"
 	@echo "... src/worldgen/biome_mesa.i"
 	@echo "... src/worldgen/biome_mesa.s"
+	@echo "... src/worldgen/biome_ocean.o"
+	@echo "... src/worldgen/biome_ocean.i"
+	@echo "... src/worldgen/biome_ocean.s"
 	@echo "... src/worldgen/biome_rainforest.o"
 	@echo "... src/worldgen/biome_rainforest.i"
 	@echo "... src/worldgen/biome_rainforest.s"

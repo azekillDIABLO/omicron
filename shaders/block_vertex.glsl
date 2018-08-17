@@ -31,7 +31,7 @@ void main() {
     }
     else {
         float camera_distance = distance(camera, vec3(position));
-        fog_factor = pow(clamp(camera_distance / fog_distance, 0.0, 1.0), 3.0);
+        fog_factor = pow(clamp(camera_distance / fog_distance, 0.0, 1.0), 6.0);
         float dy = position.y - camera.y;
         float dx = distance(position.xz, camera.xz);
         fog_height = (atan(dy, dx) + pi / 2) / pi;

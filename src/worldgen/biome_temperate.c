@@ -4,6 +4,7 @@
 #include "../item.h"
 
 void generateTemperate(int dx, int dz, int x, int z, int start_h, int h, int flag, world_func func, void *arg) {
+    
     for (int y = start_h; y < h - 1; y++) {	
 		//for (int y = 30; y = 37; y++) {
 			//func(x, 37, z, Item_WATER * flag, arg);
@@ -29,7 +30,7 @@ void generateTemperate(int dx, int dz, int x, int z, int start_h, int h, int fla
     }
     
     // rocks
-    if (simplex2(x * 0.02, -z * 0.02, 4, 0.8, 2) > 0.75) {
+    if (simplex2(-x * 0.01, z * 0.01, 1, 1, 1) * (simplex2(-x * 0.1, z * 0.1, 1, 0.8, 2)) > 0.64) {
         if (h > 72) {
 			func(x, h-1, z, Item_STONE * flag, arg);
 			func(x, h, z, Item_STONE * flag, arg);
@@ -89,4 +90,14 @@ void generateTemperate(int dx, int dz, int x, int z, int start_h, int h, int fla
 			}
 		}
 	}
+	
+	// some wip ugly river don't touch the water is lava
+	/*
+    if (simplex2(-x * 0.001, z * 0.001, 4, 0.8, 2) > 0.7) {
+		//if (h < 38) {
+			func(x, h, z, 42 * flag, arg);
+		//}
+    }
+    */
+    
 }

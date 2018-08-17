@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = "/home/tux/Dev ++/Omicron"
 CMakeFiles/omicron.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f CMakeFiles/omicron.dir/build.make CMakeFiles/omicron.dir/depend
 	$(MAKE) -f CMakeFiles/omicron.dir/build.make CMakeFiles/omicron.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76 "Built target omicron"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76 "Built target omicron"
 .PHONY : CMakeFiles/omicron.dir/all
 
 # Include target in all.
@@ -76,7 +76,7 @@ all: CMakeFiles/omicron.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/omicron.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tux/Dev ++/Omicron/CMakeFiles" 41
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tux/Dev ++/Omicron/CMakeFiles" 42
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/omicron.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tux/Dev ++/Omicron/CMakeFiles" 0
 .PHONY : CMakeFiles/omicron.dir/rule
@@ -178,7 +178,7 @@ deps/glfw/src/preinstall:
 deps/glfw/src/CMakeFiles/glfw.dir/all:
 	$(MAKE) -f deps/glfw/src/CMakeFiles/glfw.dir/build.make deps/glfw/src/CMakeFiles/glfw.dir/depend
 	$(MAKE) -f deps/glfw/src/CMakeFiles/glfw.dir/build.make deps/glfw/src/CMakeFiles/glfw.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=19,20,21,22,23,24,25,26,27,28,29,30,31,32 "Built target glfw"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=18,19,20,21,22,23,24,25,26,27,28,29,30,31 "Built target glfw"
 .PHONY : deps/glfw/src/CMakeFiles/glfw.dir/all
 
 # Include target in all.
@@ -245,7 +245,7 @@ deps/glfw/examples/preinstall:
 deps/glfw/examples/CMakeFiles/heightmap.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f deps/glfw/examples/CMakeFiles/heightmap.dir/build.make deps/glfw/examples/CMakeFiles/heightmap.dir/depend
 	$(MAKE) -f deps/glfw/examples/CMakeFiles/heightmap.dir/build.make deps/glfw/examples/CMakeFiles/heightmap.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=36,37,38 "Built target heightmap"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=35,36,37 "Built target heightmap"
 .PHONY : deps/glfw/examples/CMakeFiles/heightmap.dir/all
 
 # Include target in all.
@@ -282,7 +282,7 @@ clean: deps/glfw/examples/CMakeFiles/heightmap.dir/clean
 deps/glfw/examples/CMakeFiles/gears.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f deps/glfw/examples/CMakeFiles/gears.dir/build.make deps/glfw/examples/CMakeFiles/gears.dir/depend
 	$(MAKE) -f deps/glfw/examples/CMakeFiles/gears.dir/build.make deps/glfw/examples/CMakeFiles/gears.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=17,18 "Built target gears"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=16,17 "Built target gears"
 .PHONY : deps/glfw/examples/CMakeFiles/gears.dir/all
 
 # Include target in all.
@@ -393,7 +393,7 @@ clean: deps/glfw/examples/CMakeFiles/wave.dir/clean
 deps/glfw/examples/CMakeFiles/boing.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f deps/glfw/examples/CMakeFiles/boing.dir/build.make deps/glfw/examples/CMakeFiles/boing.dir/depend
 	$(MAKE) -f deps/glfw/examples/CMakeFiles/boing.dir/build.make deps/glfw/examples/CMakeFiles/boing.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=1,2 "Built target boing"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=1 "Built target boing"
 .PHONY : deps/glfw/examples/CMakeFiles/boing.dir/all
 
 # Include target in all.
@@ -403,7 +403,7 @@ all: deps/glfw/examples/CMakeFiles/boing.dir/all
 
 # Build rule for subdir invocation for target.
 deps/glfw/examples/CMakeFiles/boing.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tux/Dev ++/Omicron/CMakeFiles" 16
+	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tux/Dev ++/Omicron/CMakeFiles" 15
 	$(MAKE) -f CMakeFiles/Makefile2 deps/glfw/examples/CMakeFiles/boing.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/home/tux/Dev ++/Omicron/CMakeFiles" 0
 .PHONY : deps/glfw/examples/CMakeFiles/boing.dir/rule
@@ -700,7 +700,7 @@ clean: deps/glfw/tests/CMakeFiles/threads.dir/clean
 deps/glfw/tests/CMakeFiles/empty.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/empty.dir/build.make deps/glfw/tests/CMakeFiles/empty.dir/depend
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/empty.dir/build.make deps/glfw/tests/CMakeFiles/empty.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=8,9,10 "Built target empty"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=7,8,9 "Built target empty"
 .PHONY : deps/glfw/tests/CMakeFiles/empty.dir/all
 
 # Include target in all.
@@ -737,7 +737,7 @@ clean: deps/glfw/tests/CMakeFiles/empty.dir/clean
 deps/glfw/tests/CMakeFiles/msaa.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/msaa.dir/build.make deps/glfw/tests/CMakeFiles/msaa.dir/depend
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/msaa.dir/build.make deps/glfw/tests/CMakeFiles/msaa.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=47,48,49 "Built target msaa"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=46,47,48 "Built target msaa"
 .PHONY : deps/glfw/tests/CMakeFiles/msaa.dir/all
 
 # Include target in all.
@@ -811,7 +811,7 @@ clean: deps/glfw/tests/CMakeFiles/tearing.dir/clean
 deps/glfw/tests/CMakeFiles/events.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/events.dir/build.make deps/glfw/tests/CMakeFiles/events.dir/depend
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/events.dir/build.make deps/glfw/tests/CMakeFiles/events.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=11,12,13 "Built target events"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=10,11,12 "Built target events"
 .PHONY : deps/glfw/tests/CMakeFiles/events.dir/all
 
 # Include target in all.
@@ -848,7 +848,7 @@ clean: deps/glfw/tests/CMakeFiles/events.dir/clean
 deps/glfw/tests/CMakeFiles/gamma.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/gamma.dir/build.make deps/glfw/tests/CMakeFiles/gamma.dir/depend
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/gamma.dir/build.make deps/glfw/tests/CMakeFiles/gamma.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=14,15,16 "Built target gamma"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=13,14,15 "Built target gamma"
 .PHONY : deps/glfw/tests/CMakeFiles/gamma.dir/all
 
 # Include target in all.
@@ -885,7 +885,7 @@ clean: deps/glfw/tests/CMakeFiles/gamma.dir/clean
 deps/glfw/tests/CMakeFiles/glfwinfo.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/glfwinfo.dir/build.make deps/glfw/tests/CMakeFiles/glfwinfo.dir/depend
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/glfwinfo.dir/build.make deps/glfw/tests/CMakeFiles/glfwinfo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=33,34,35 "Built target glfwinfo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=32,33,34 "Built target glfwinfo"
 .PHONY : deps/glfw/tests/CMakeFiles/glfwinfo.dir/all
 
 # Include target in all.
@@ -922,7 +922,7 @@ clean: deps/glfw/tests/CMakeFiles/glfwinfo.dir/clean
 deps/glfw/tests/CMakeFiles/iconify.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/iconify.dir/build.make deps/glfw/tests/CMakeFiles/iconify.dir/depend
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/iconify.dir/build.make deps/glfw/tests/CMakeFiles/iconify.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=39,40,41 "Built target iconify"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=38,39,40 "Built target iconify"
 .PHONY : deps/glfw/tests/CMakeFiles/iconify.dir/all
 
 # Include target in all.
@@ -959,7 +959,7 @@ clean: deps/glfw/tests/CMakeFiles/iconify.dir/clean
 deps/glfw/tests/CMakeFiles/monitors.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/monitors.dir/build.make deps/glfw/tests/CMakeFiles/monitors.dir/depend
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/monitors.dir/build.make deps/glfw/tests/CMakeFiles/monitors.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=44,45,46 "Built target monitors"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=43,44,45 "Built target monitors"
 .PHONY : deps/glfw/tests/CMakeFiles/monitors.dir/all
 
 # Include target in all.
@@ -996,7 +996,7 @@ clean: deps/glfw/tests/CMakeFiles/monitors.dir/clean
 deps/glfw/tests/CMakeFiles/cursor.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/cursor.dir/build.make deps/glfw/tests/CMakeFiles/cursor.dir/depend
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/cursor.dir/build.make deps/glfw/tests/CMakeFiles/cursor.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=6,7 "Built target cursor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=5,6 "Built target cursor"
 .PHONY : deps/glfw/tests/CMakeFiles/cursor.dir/all
 
 # Include target in all.
@@ -1033,7 +1033,7 @@ clean: deps/glfw/tests/CMakeFiles/cursor.dir/clean
 deps/glfw/tests/CMakeFiles/joysticks.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/joysticks.dir/build.make deps/glfw/tests/CMakeFiles/joysticks.dir/depend
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/joysticks.dir/build.make deps/glfw/tests/CMakeFiles/joysticks.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=42,43 "Built target joysticks"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=41,42 "Built target joysticks"
 .PHONY : deps/glfw/tests/CMakeFiles/joysticks.dir/all
 
 # Include target in all.
@@ -1070,7 +1070,7 @@ clean: deps/glfw/tests/CMakeFiles/joysticks.dir/clean
 deps/glfw/tests/CMakeFiles/clipboard.dir/all: deps/glfw/src/CMakeFiles/glfw.dir/all
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/clipboard.dir/build.make deps/glfw/tests/CMakeFiles/clipboard.dir/depend
 	$(MAKE) -f deps/glfw/tests/CMakeFiles/clipboard.dir/build.make deps/glfw/tests/CMakeFiles/clipboard.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=3,4,5 "Built target clipboard"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=2,3,4 "Built target clipboard"
 .PHONY : deps/glfw/tests/CMakeFiles/clipboard.dir/all
 
 # Include target in all.

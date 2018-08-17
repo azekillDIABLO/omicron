@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 //#include <gtk.h>
 #include "attrib.h"
 #include "auth.h"
@@ -774,6 +775,19 @@ void occlusion(
 #define XYZ(x, y, z) ((y) * XZ_SIZE * XZ_SIZE + (x) * XZ_SIZE + (z))
 #define XZ(x, z) ((x) * XZ_SIZE + (z))
 
+/**
+int get_block(int x, int y, int z) {
+    int p = chunked(x);
+    int q = chunked(z);
+    Chunk *chunk = find_chunk(p, q);
+    if (chunk) {
+        Map *map = &chunk->map;
+        return map_get(map, x, y, z);
+    }
+    return 0;
+}
+**/
+
 void light_fill(
     char *opaque, char *light,
     int x, int y, int z, int w, int force)
@@ -837,7 +851,7 @@ void compute_chunk(WorkerItem *item) {
                 int z = ez - oz;
                 int w = ew;
 				
-                // TODO: this should be unnecessary
+                // TODO: this should be unnecessary (but as long it works :3)
                 if (x < 0 || y < 0 || z < 0) {
                     continue;
                 }
@@ -845,7 +859,11 @@ void compute_chunk(WorkerItem *item) {
                     continue;
                 }
                 // END TODO
-                opaque[XYZ(x, y, z)] = !is_transparent(w);
+                
+                //if (!is_liquid(get_block(x, y+1, z))) {
+					opaque[XYZ(x, y, z)] = !is_transparent(w);
+				//}
+                
                 if (opaque[XYZ(x, y, z)]) {
                     highest[XZ(x, z)] = MAX(highest[XZ(x, z)], y);
                 }
@@ -1467,6 +1485,7 @@ void record_block(int x, int y, int z, int w) {
     g->block0.w = w;
 }
 
+// Get_block was here
 int get_block(int x, int y, int z) {
     int p = chunked(x);
     int q = chunked(z);
@@ -1477,6 +1496,7 @@ int get_block(int x, int y, int z) {
     }
     return 0;
 }
+
 
 void builder_block(int x, int y, int z, int w) {
     if (y <= 0 || y >= BUILD_HEIGHT_LIMIT) {
@@ -2410,10 +2430,20 @@ void handle_movement(double dt) {
                         dy = 0.0f;
                     }
                 }
-            } else if (is_liquid(w)) {
+            } else if (is_liquid(w)) { 
                 				
-				//vy = vy;
+				if (is_jump_pressed) {
+                    dy = 2.5f;
+                    //dy = 0;
+                
+                } else if (is_descend_pressed) {
+                    dy = -0.5f;
+                    //dy = 0;
+                        
+                } 
+                
 				vx = vx/1.2;
+				//vy = vy/1.6;
 				vz = vz/1.2;
                 
             }
@@ -2575,12 +2605,28 @@ void reset_model() {
     Inventory_reset(&g->inventory);
 }
 
+void advance_cursor() {
+  static int pos=0;
+  char cursor[4]={'/','-','\\','|'};
+  printf("> The game is running %c\r", cursor[pos]);
+  fflush(stdout);
+  //sleep(1);
+  pos = (pos+1) % 4;
+}
+
 int main(int argc, char **argv) {
     // INITIALIZATION //
     curl_global_init(CURL_GLOBAL_DEFAULT);
     srand(time(NULL));
     rand();
-
+    
+    // TERMINAL TEST GUI //
+    
+    // Header generated using -> https://fsymbols.com/generators/tarty/
+    printf("\n▒█▀▀▀█ ▒█▀▄▀█ ▀█▀ ▒█▀▀█ ▒█▀▀█ ▒█▀▀▀█ ▒█▄░▒█ \n▒█░░▒█ ▒█▒█▒█ ▒█░ ▒█░░░ ▒█▄▄▀ ▒█░░▒█ ▒█▒█▒█ \n▒█▄▄▄█ ▒█░░▒█ ▄█▄ ▒█▄▄█ ▒█░▒█ ▒█▄▄▄█ ▒█░░▀█ \n		   a game by azekill_DIABLO\n\n");
+    printf("> Press RETURN to start");
+    getchar();
+    
     // WINDOW INITIALIZATION //
     if (!glfwInit()) {
         return -1;
@@ -2768,6 +2814,7 @@ int main(int argc, char **argv) {
         }
 
         // BEGIN MAIN LOOP //
+		
         double previous = glfwGetTime();
         while (1) {
 			if (INFINI_STUFF == 1) {
@@ -2948,10 +2995,13 @@ int main(int argc, char **argv) {
                 g->mode_changed = 0;
                 break;
             }
+            
+            // OUTPUT IN TERMINAL //
+			advance_cursor();
         }
 
         // SHUTDOWN //
-        printf("\nOmicron: Game closing ... \n");
+        printf("\n\n[Omicron] The game is closing ... Have a good day!\n");
         db_save_state(s->x, s->y, s->z, s->rx, s->ry);
         db_close();
         db_disable();
