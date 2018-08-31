@@ -69,6 +69,12 @@ typedef enum {
     Item_IRON_ORE,
     Item_GOLD_ORE,
     Item_RUBIS_ORE,
+    Item_COAL_BLOCK,
+	Item_IRON_BLOCK,
+	Item_GOLD_BLOCK,
+	Item_RUBIS_BLOCK,
+	Item_ICE,
+	Item_TNT,
     Item_max
 } Item;
 
@@ -86,6 +92,7 @@ int is_plant(int w);
 int is_obstacle(int w);
 int is_transparent(int w);
 int is_destructable(int w);
+int boom_on_click(int w);
 int is_climbable(int w);
 int is_noncube(int w);
 int is_liquid (int w);

@@ -1,4 +1,4 @@
-#version 130
+#version 120
 
 uniform sampler2D sampler;
 uniform sampler2D sky_sampler;
@@ -17,13 +17,17 @@ varying float diffuse;
 const float pi = 3.14159265;
 
 void main() {
-    vec4 color = vec4(texture(sampler, fragment_uv));
-
-    bool cloud = color == vec4(0.0, 0.0, 0.0, 1.0);
-    if (cloud && bool(ortho)) {
+    vec4 color = vec4(texture2D(sampler, fragment_uv));
+    
+    if (color == vec4(1.0, 0.0, 1.0, 1.0)) {
         discard;
     }
     
+    bool cloud = color == vec4(1.0, 1.0, 1.0, 1.0);
+    if (cloud && bool(ortho)) {
+        discard;
+    }
+   
     float df = cloud ? 1.0 - diffuse * 0.2 : diffuse;
     float ao = cloud ? 1.0 - (1.0 - fragment_ao) * 0.2 : fragment_ao;
     ao = min(1.0, ao + fragment_light);
@@ -36,21 +40,13 @@ void main() {
     
     vec3 a = vec3(texture2D(sky_sampler, vec2(timer, fog_height))) * sky_tint;
     vec4 sky_color = vec4(a, 1.0);
-	
-    if (color == vec4(1.0, 0.0, 1.0, 1.0)) {
-        discard;
+    
+    if (color.a == 1.0) {
+        color.a = 0.0;
     }
-    
-	if (color.a < 1.0) {
-       //color.a = 0.0;
-       //color = vec4(0.0);
-       discard;
-    } else {
-	color.a = 1.0;
-	}
-    
-    color = color * light_color; 
-    color = mix(color, sky_color, fog_factor);
 	
+    color = color * light_color;
+    color = mix(color, sky_color, fog_factor);
+
     gl_FragColor = vec4(color);
 }

@@ -29,6 +29,10 @@ GLuint gen_text_buffer(float x, float y, float n, char *text) {
 }
 
 void draw_triangles_3d_ao(Attrib *attrib, GLuint buffer, int count) {
+	glEnable(GL_BLEND); //*
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glEnable(GL_CULL_FACE);  
+    glBlendEquation(GL_FUNC_ADD);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glEnableVertexAttribArray(attrib->position);
     glEnableVertexAttribArray(attrib->normal);
@@ -44,6 +48,8 @@ void draw_triangles_3d_ao(Attrib *attrib, GLuint buffer, int count) {
     glDisableVertexAttribArray(attrib->normal);
     glDisableVertexAttribArray(attrib->uv);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_BLEND);
 }
 
 void draw_triangles_3d_text(Attrib *attrib, GLuint buffer, int count) {
@@ -61,6 +67,10 @@ void draw_triangles_3d_text(Attrib *attrib, GLuint buffer, int count) {
 }
 
 void draw_triangles_3d(Attrib *attrib, GLuint buffer, int count) {
+	glEnable(GL_BLEND); //*
+	glEnable(GL_CULL_FACE);
+	glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glEnableVertexAttribArray(attrib->position);
     glEnableVertexAttribArray(attrib->normal);
@@ -76,6 +86,8 @@ void draw_triangles_3d(Attrib *attrib, GLuint buffer, int count) {
     glDisableVertexAttribArray(attrib->normal);
     glDisableVertexAttribArray(attrib->uv);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_BLEND);
 }
 
 void draw_triangles_2d(Attrib *attrib, GLuint buffer, int count) {
@@ -132,7 +144,11 @@ void draw_sign(Attrib *attrib, GLuint buffer, int length) {
 }
 
 void draw_cube(Attrib *attrib, GLuint buffer) {
+	//glEnable(GL_BLEND);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glBlendEquation(GL_FUNC_ADD);
     draw_item(attrib, buffer, 36);
+    //glDisable(GL_BLEND);
 }
 
 void draw_plant(Attrib *attrib, GLuint buffer) {

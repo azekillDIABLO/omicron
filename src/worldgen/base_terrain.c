@@ -33,11 +33,18 @@ void generateBaseTerrain(int dx, int dz, int x, int z, int start_h, int h, int f
 		
             		
 		// Caves  
-		for (int y = 1; y < 38; y++) {
+		for (int y = 1; y < 37; y++) {
 			if (simplex3(
 						x * 0.06, y * 0.08, z * 0.06, 8, 0.3, 2) > 0.64) { 
 				func(x, y, z, 0 * flag, arg);
 			}
-		}     
+		}  
+		
+		// Ravines
+		for (int y = 3; y < 30; y++) {
+			if (simplex2(x * 0.06, z * 0.006, 8, 0.3, 2) > 0.70 && simplex2(x * 0.006, z * 0.006, 3, 0.8, 2) > 0.70) { 
+				func(x, y, z, 0 * flag, arg);
+			}
+		}
     }
 }

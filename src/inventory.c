@@ -7,7 +7,7 @@ void Inventory_reset(Inventory *m) {
 }
 
 int Inventory_collect(Inventory *m, int w) {
-    if(m->count[w] < 255) {
+    if(m->count[w] < 255) { // Stack size ... What would be a better value? A twelve mutiple?
         m->count[w]++;
         return 1;
     } else {

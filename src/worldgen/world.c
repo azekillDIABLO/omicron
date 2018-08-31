@@ -32,9 +32,9 @@ void create_world(int p, int q, world_func func, void *arg) {
             
             
 			// mh
-            int mh = g * simplex2(-x * 0.001, -z * 0.001, 2, 16.0, 2);
+            int mh = g * simplex2(-x * 0.0005, -z * 0.0005, 2, 16.0, 2);
 
-            mh += simplex2(-x * 0.0005, -z * 0.0005, 2, 16.0, 2) * simplex2(-x * 0.005, -z * 0.005, 2, 16.0, 2) * 100;
+            mh += simplex2(-x * 0.0002, -z * 0.0002, 2, 16.0, 2) * simplex2(-x * 0.002, -z * 0.002, 2, 16.0, 2) * 100;
 
             mh += 16;
             
@@ -73,19 +73,39 @@ void create_world(int p, int q, world_func func, void *arg) {
                 }
             }
             
-            // Lakes
+            // ocean
            
+			// water and sand
             for (int y = 30; y < 37; y++) { 
 				float coef = 1.1 - y/62.0;	
+				if (simplex2(x * 0.00091, z * 0.00091, 6, 1, 2) > coef-0.15) {
+					func(x, y, z, Item_SAND * flag, arg);
+				} 
 				if (simplex2(x * 0.00091, z * 0.00091, 6, 1, 2) > coef) {
 					func(x, y, z, Item_WATER * flag, arg);
 				} 
 			}
+			// ocean bottom
+			if (simplex2(x * 0.00091, z * 0.00091, 6, 1, 2) > 0.614) {
+					func(x, 29, z, Item_SAND * flag, arg);
+			} 
+						
+			// empty
+			for (int y = 37; y < 119; y++) { 
+				//float coef = y/60.0;	
+				if (simplex2(x * 0.00091, z * 0.00091, 6, 1, 2) > 0.5) {
+					func(x, y, z, 0 * flag, arg);
+				}
+			}
 			
-			for (int y = 37; y < 45; y++) { 
-				float coef = y/70.0;	
-				if (simplex2(x * 0.00091, z * 0.00091, 6, 1, 2) > coef) {
-					func(x, y, z, Item_EMPTY * flag, arg);
+			// ice on frigid biomes
+			float biomen = simplex3(-x * 0.0005 * (1 / BIOME_SIZE), -z * 0.0005 * (1 / BIOME_SIZE), q * 0.001, 2, 16.0, 1);
+			if(biomen > (4.0f/5.0f) && biomen < (5.0f/5.0f)) {
+				// ice on water but not on sand
+				if (simplex2(-x * 0.01, z * 0.01, 6, 0.6, 2) > 0.60 && 
+				(simplex2(x * 0.00091, z * 0.00091, 6, 1, 2) > 0.52)) {
+					func(x, 36, z, Item_ICE * flag, arg);
+					func(x, 35, z, Item_ICE * flag, arg);
 				}
 			}
 			
@@ -119,8 +139,7 @@ void create_world(int p, int q, world_func func, void *arg) {
             // Unbreakable Core shell
             func(x, 0, z, Item_CORESHELL * flag, arg);
             if (simplex2(
-					x * 0.5, z * 0.5, 7, 3, 5) > 0.6)
-                {
+					x * 0.4, z * 0.4, 7, 3, 5) > 0.6) {
 				func(x, 1, z, Item_CORESHELL * flag, arg);
 			}
 			
@@ -165,8 +184,5 @@ Biome biome_at_pos(int q, int x, int z) {
 	if(biome == (Biome_max)) {
         biome = Biome_MESA;
     } 
-    //if(biome == (Biome_max)) {
-    //    biome = Biome_OCEAN;
-    //}
     return biome;
 }

@@ -5,7 +5,7 @@
 #define FLY_SPEED 70
 #define WALK_SPEED 6
 #define CLIMB_SPEED 4
-#define BUILD_HEIGHT_LIMIT 2048
+#define BUILD_HEIGHT_LIMIT 255
 #define NUM_INVENTORY_VISIBLE 7
 #define INFINI_STUFF 1
 
@@ -15,13 +15,13 @@
 
 // app parameters
 #define DEBUG 1
-#define FULLSCREEN 0
+#define FULLSCREEN 0 //put to zero, fullscreen bugs
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 768
 #define VSYNC 1
 #define SCROLL_THRESHOLD 0.1
-#define MAX_MESSAGES 5
-#define DB_PATH "omicron-world.db"
+#define MAX_MESSAGES 10
+#define DB_PATH "world/omicron-world.db"
 #define USE_CACHE 1
 #define DAY_LENGTH 500
 #define INVERT_MOUSE 0

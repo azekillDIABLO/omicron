@@ -5,7 +5,7 @@ uniform sampler2D sky_sampler;
 uniform float timer;
 uniform float daylight;
 uniform int ortho;
-uniform vec3 sky_tint;
+uniform vec3 sky_tint; //v4
 
 varying vec2 fragment_uv;
 varying float fragment_ao;
@@ -17,6 +17,7 @@ varying float diffuse;
 const float pi = 3.14159265;
 
 void main() {
+	// First layer, DISCARD all alpha. (ex: water will go invisible)
     vec4 color = vec4(texture(sampler, fragment_uv));
 
     bool cloud = color == vec4(0.0, 0.0, 0.0, 1.0);

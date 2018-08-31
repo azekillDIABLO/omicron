@@ -18,16 +18,22 @@ const int items[] = {
     Item_LIGHT_STONE,
     Item_DARK_STONE,
     Item_CHEST,
+    Item_TNT,
     Item_LEAVES,
     //Item_CLOUD,
     //Item_CORESHELL,
     Item_WATER,
+    Item_ICE,
     Item_CACTUS,
     Item_PLAYER,
     Item_COAL_ORE,
 	Item_IRON_ORE,
 	Item_GOLD_ORE,
 	Item_RUBIS_ORE,
+    Item_COAL_BLOCK,
+	Item_IRON_BLOCK,
+	Item_GOLD_BLOCK,
+	Item_RUBIS_BLOCK,
     
     //Flowers
     Item_TALL_GRASS,
@@ -115,7 +121,7 @@ const int blocks[256][6] = {
     {0, 0, 0, 0, 0, 0}, // 31
 
     
-    // Color Blocks ----------------//
+    // Color Blocks ----------------// --
     {176, 176, 176, 176, 176, 176}, // 32
     {177, 177, 177, 177, 177, 177}, // 33
     {178, 178, 178, 178, 178, 178}, // 34
@@ -148,7 +154,7 @@ const int blocks[256][6] = {
     {205, 205, 205, 205, 205, 205}, // 61
     {206, 206, 206, 206, 206, 206}, // 62
     {207, 207, 207, 207, 207, 207}, // 63
-    // End of Color Blocks----------//
+    // End of Color Blocks----------// --
     
     {226, 224, 241, 209, 225, 227}, // 64 - player block (Facedir?)
     {210, 210, 210, 210, 210, 210}, // 65 - cactus
@@ -161,7 +167,13 @@ const int blocks[256][6] = {
     {65, 65, 65, 65, 65, 65}, // 72 - iron ore
     {66, 66, 66, 66, 66, 66}, // 73 - gold ore
     {67, 67, 67, 67, 67, 67}, // 74 - rubis ore
-    {0, 0, 0, 0, 0, 0} // 71 - empty
+    {80, 80, 80, 80, 80, 80}, // 75 - coal block
+    {81, 81, 81, 81, 81, 81}, // 76 - iron block
+    {82, 82, 82, 82, 82, 82}, // 77 - gold block
+    {83, 83, 83, 83, 83, 83}, // 78 - rubis block 
+    {213, 213, 213, 213, 213, 213}, // 79 - ice 
+    {214, 214, 215, 216, 214, 214}, // 80 - TNT 
+    {0, 0, 0, 0, 0, 0} // - empty
 };
 
 const int plants[256] = {
@@ -235,7 +247,7 @@ int is_transparent(int w) {
         case Item_EMPTY:
         case Item_GLASS:
         //case Item_LEAVES: //for better performance (8 fps -> 60fps OPTIMIZATION NEEDED!) 
-        //case Item_WATER: //Just to stop Xray-ing
+        case Item_WATER: //Just to stop Xray-ing
             return 1;
         default:
             return 0;
@@ -255,18 +267,23 @@ int is_destructable(int w) {
 }
 
 int buildable_to(int w) {
+	w = ABS(w);
+    if (is_plant(w)) {
+        return 0;
+    }
+	
     switch (w) {
         case Item_WATER:
         case Item_CLOUD:
-        case Item_TALL_GRASS:
-        case Item_YELLOW_FLOWER:
-        case Item_RED_FLOWER:
-        case Item_PURPLE_FLOWER:
-        case Item_SUN_FLOWER:
-        case Item_WHITE_FLOWER:
-        case Item_BLUE_FLOWER:
-        case Item_VINE:
-        case Item_CACTI:
+            return 0;
+        default:
+            return 1;
+    }
+}
+
+int boom_on_click(int w) {
+    switch (w) {
+        case Item_TNT:
             return 0;
         default:
             return 1;

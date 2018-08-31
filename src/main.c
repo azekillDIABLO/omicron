@@ -7,6 +7,7 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include <dirent.h>
 //#include <gtk.h>
 #include "attrib.h"
 #include "auth.h"
@@ -771,12 +772,12 @@ void occlusion(
 #define XZ_SIZE (CHUNK_SIZE * 3 + 2)
 #define XZ_LO (CHUNK_SIZE)
 #define XZ_HI (CHUNK_SIZE * 2 + 1)
-#define Y_SIZE 258 //Higher would be better
+#define Y_SIZE 256 //Higher would be better
 #define XYZ(x, y, z) ((y) * XZ_SIZE * XZ_SIZE + (x) * XZ_SIZE + (z))
 #define XZ(x, z) ((x) * XZ_SIZE + (z))
 
-/**
-int get_block(int x, int y, int z) {
+
+int map_get_block(int x, int y, int z) {
     int p = chunked(x);
     int q = chunked(z);
     Chunk *chunk = find_chunk(p, q);
@@ -786,7 +787,7 @@ int get_block(int x, int y, int z) {
     }
     return 0;
 }
-**/
+
 
 void light_fill(
     char *opaque, char *light,
@@ -816,8 +817,13 @@ void light_fill(
     light_fill(opaque, light, x, y, z + 1, w, 0);
 }
 
+int umap_get_block(Map *map, int x, int y, int z) { //optimized function for use during chunk generation
+	return map_get(map, x, y, z);
+}
+
 void compute_chunk(WorkerItem *item) {
     char *opaque = (char *)calloc(XZ_SIZE * XZ_SIZE * Y_SIZE, sizeof(char));
+    char *visible = (char *)calloc(XZ_SIZE * XZ_SIZE * Y_SIZE, sizeof(char));
     char *light = (char *)calloc(XZ_SIZE * XZ_SIZE * Y_SIZE, sizeof(char));
     char *highest = (char *)calloc(XZ_SIZE * XZ_SIZE, sizeof(char));
 
@@ -850,7 +856,7 @@ void compute_chunk(WorkerItem *item) {
                 int y = ey - oy;
                 int z = ez - oz;
                 int w = ew;
-				
+
                 // TODO: this should be unnecessary (but as long it works :3)
                 if (x < 0 || y < 0 || z < 0) {
                     continue;
@@ -859,43 +865,12 @@ void compute_chunk(WorkerItem *item) {
                     continue;
                 }
                 // END TODO
-                
-                //if (!is_liquid(get_block(x, y+1, z))) {
-					opaque[XYZ(x, y, z)] = !is_transparent(w);
-				//}
+				opaque[XYZ(x, y, z)] = !is_transparent(w);
+				visible[XYZ(x, y, z)] = is_liquid(w);
                 
                 if (opaque[XYZ(x, y, z)]) {
                     highest[XZ(x, z)] = MAX(highest[XZ(x, z)], y);
                 }
-                
-                /*
-                if (!is_transparent(w)) {
-					
-					if (!opaque[XYZ(x, y + 1, z)]) {
-						opaque[XYZ(x, y + 1, z)];
-					}
-
-					if (!opaque[XYZ(x, y - 1, z)] && (ey > 0)) {
-						opaque[XYZ(x, y - 1, z)];
-					}
-					
-					if (!opaque[XYZ(x + 1, y, z)]){
-						opaque[XYZ(x + 1, y, z)];
-					}
-					
-					if (!opaque[XYZ(x - 1, y, z)]){
-						opaque[XYZ(x - 1, y, z)];
-					}
-					
-					if (!opaque[XYZ(x, y, z + 1)]){
-						opaque[XYZ(x, y, z + 1)];
-					}
-					
-					if (!opaque[XYZ(x, y, z - 1)]){
-						opaque[XYZ(x, y, z - 1)];
-					}	
-				}
-				*/
             } END_MAP_FOR_EACH;
         }
     }
@@ -928,18 +903,53 @@ void compute_chunk(WorkerItem *item) {
         if (ew <= 0) {
             continue;
         }
+        
         int x = ex - ox;
         int y = ey - oy;
         int z = ez - oz;
-        int f1 = !opaque[XYZ(x - 1, y, z)];
-        int f2 = !opaque[XYZ(x + 1, y, z)];
-        int f3 = !opaque[XYZ(x, y + 1, z)];
-        int f4 = !opaque[XYZ(x, y - 1, z)] && (ey > 0);
-        int f5 = !opaque[XYZ(x, y, z - 1)];
-        int f6 = !opaque[XYZ(x, y, z + 1)];
+     
+		
+		int f1 = !opaque[XYZ(x - 1, y, z)];
+		int f2 = !opaque[XYZ(x + 1, y, z)];
+		int f3 = !opaque[XYZ(x, y + 1, z)];
+		int f4 = !opaque[XYZ(x, y - 1, z)] && (ey > 0);
+		int f5 = !opaque[XYZ(x, y, z - 1)];
+		int f6 = !opaque[XYZ(x, y, z + 1)];
+		
+		int v1 = !visible[XYZ(x - 1, y, z)];
+		int v2 = !visible[XYZ(x + 1, y, z)];
+		int v3 = !visible[XYZ(x, y + 1, z)];
+		int v4 = !visible[XYZ(x, y - 1, z)] && (ey > 0);
+		int v5 = !visible[XYZ(x, y, z - 1)];
+		int v6 = !visible[XYZ(x, y, z + 1)];
+        
+        if (is_liquid(ew)) {
+			if (v1 == 0) {
+				f1 = 0;
+			}
+			if (v2 == 0) {
+				f2 = 0;
+			}
+			
+			if (v3 == 0) {
+				f3 = 0;
+			}
+			if (v4 == 0) {
+				f4 = 0;
+			}
+					
+			if (v5 == 0) {
+				f5 = 0;
+			}
+			if (v6 == 0) {
+				f6 = 0;
+			}			
+		}	
+        
         int total = f1 + f2 + f3 + f4 + f5 + f6;
+
         if (total == 0) {
-            continue;
+			continue;
         }
         if (is_plant(ew)) {
             total = 4;
@@ -965,8 +975,40 @@ void compute_chunk(WorkerItem *item) {
         int f4 = !opaque[XYZ(x, y - 1, z)] && (ey > 0);
         int f5 = !opaque[XYZ(x, y, z - 1)];
         int f6 = !opaque[XYZ(x, y, z + 1)];
-        int total = f1 + f2 + f3 + f4 + f5 + f6;
-        if (total == 0) {
+        
+		int v1 = !visible[XYZ(x - 1, y, z)];
+		int v2 = !visible[XYZ(x + 1, y, z)];
+		int v3 = !visible[XYZ(x, y + 1, z)];
+		int v4 = !visible[XYZ(x, y - 1, z)] && (ey > 0);
+		int v5 = !visible[XYZ(x, y, z - 1)];
+		int v6 = !visible[XYZ(x, y, z + 1)];
+		
+		if (is_liquid(ew)) {
+			if (v1 == 0) {
+				f1 = 0;
+			}
+			if (v2 == 0) {
+				f2 = 0;
+			}
+			
+			if (v3 == 0) {
+				f3 = 0;
+			}
+			if (v4 == 0) {
+				f4 = 0;
+			}
+					
+			if (v5 == 0) {
+				f5 = 0;
+			}
+			if (v6 == 0) {
+				f6 = 0;
+			}			
+		}	
+			
+		int total = f1 + f2 + f3 + f4 + f5 + f6;
+		
+		if (total == 0) {
             continue;
         }
         char neighbors[27] = {0};
@@ -980,12 +1022,12 @@ void compute_chunk(WorkerItem *item) {
                     lights[index] = light[XYZ(x + dx, y + dy, z + dz)];
                     shades[index] = 0;
                     if (y + dy <= highest[XZ(x + dx, z + dz)]) {
-                        for (int oy = 0; oy < 8; oy++) {
-                            if (opaque[XYZ(x + dx, y + dy + oy, z + dz)]) {
-                                shades[index] = 1.0 - oy * 0.125;
-                                break;
-                            }
-                        }
+						for (int oy = 0; oy < 8; oy++) {
+							if (opaque[XYZ(x + dx, y + dy + oy, z + dz)]) {
+								shades[index] = 1.0 - oy * 0.125;
+								break;
+							}
+						}
                     }
                     index++;
                 }
@@ -993,7 +1035,9 @@ void compute_chunk(WorkerItem *item) {
         }
         float ao[6][4];
         float light[6][4];
-        occlusion(neighbors, lights, shades, ao, light);
+        
+		occlusion(neighbors, lights, shades, ao, light);
+		
         if (is_plant(ew)) {
             total = 4;
             float min_ao = 1;
@@ -1025,6 +1069,7 @@ void compute_chunk(WorkerItem *item) {
     } END_MAP_FOR_EACH;
 
     free(opaque);
+    free(visible);
     free(light);
     free(highest);
 
@@ -1705,8 +1750,44 @@ void render_item_count(Attrib *attrib, float ts) {
     }
 }
 
+void render_ui(Attrib *attrib) {
+    float matrix[16];
+    glUseProgram(attrib->program);
+    set_matrix_item(matrix, g->width, g->height, g->scale + 1);
+    glUniform3f(attrib->camera, 0, 0, 5);
+    glUniform1i(attrib->sampler, 0);
+    glUniform1f(attrib->timer, time_of_day());
+    for(int i = 0; i < NUM_INVENTORY_VISIBLE; ++i) {
+        if(g->item_index + i >= item_count) {
+            break;
+        }
+
+        glUniformMatrix4fv(attrib->matrix, 1, GL_FALSE, matrix);
+
+        int w = items[g->item_index + i];
+        if (is_plant(w)) {
+            GLuint buffer = gen_plant_buffer(0, 0, 0, 0.5, w);
+            draw_plant(attrib, buffer);
+            del_buffer(buffer);
+        }
+        else {
+            GLuint buffer = gen_cube_buffer(0, 0, 0, 0.5, w);
+            draw_cube(attrib, buffer);
+            del_buffer(buffer);
+        }
+
+        if(!i) {
+            set_matrix_item(matrix, g->width, g->height, g->scale);
+            matrix[12] += 0.08f;
+            matrix[13] += 0.1f;
+        }
+
+        matrix[13] += 0.25f;
+    }
+}
+
 void add_message(const char *text) {
-    printf("%s\n", text);
+    //printf("%s\n", text);
     snprintf(
         g->messages[g->message_index], MAX_TEXT_LENGTH, "%s", text);
     g->message_index = (g->message_index + 1) % MAX_MESSAGES;
@@ -1933,7 +2014,7 @@ void parse_command(const char *buffer, int forward) {
     char server_addr[MAX_ADDR_LENGTH];
     int server_port = DEFAULT_PORT;
     char filename[MAX_PATH_LENGTH];
-    int radius, count, xc, yc, zc;
+    int radius, page, count, xc, yc, zc;
     double time;
     int is_allowing_time_change = !get_client_enabled();
     if (sscanf(buffer, "/identity %128s %128s", username, token) == 2) {
@@ -1982,6 +2063,41 @@ void parse_command(const char *buffer, int forward) {
         else {
             add_message("Viewing distance must be between 1 and 24.");
         }
+    }
+    else if (strcmp(buffer, "/help") == 0) {
+		add_message("Use /help <pages> to see the list of commands.");
+	}
+		
+	else if (sscanf(buffer, "/help %d", &page) == 1) {
+		if (!page == 0) { 
+			page = page - 1;
+		}
+		float pages_float = 14 / MAX_MESSAGES; 
+		int pages = ceil(pages_float);
+		const char *content[] = { // List of commands
+							"/help (<pages>) \n", 
+							"/identity <username> <token> \n", 
+							"/logout & /login <username> \n", 
+							"/online <server adress> <port> \n",
+							"/offline (<server adress> <port>) \n",
+							"/view <radius>\n",
+							"/copy & /paste & /tree\n",
+							"/array <x> <y> <z>\n",
+							"/array <count>\n",
+							"/fcube & /cube\n",
+							"/(f)sphere <radius>\n",
+							"/(f)circlex <radius> & /(f)circley <~> & /(f)circlez <~>\n",
+							"/(f)cylinder <radius>\n",
+							"/day & /night & /time <hour>\n"};
+        
+        for(int i = 0+MAX_MESSAGES*page; i < MAX_MESSAGES+MAX_MESSAGES*page; i++) {
+			const char *output = content[i];
+			if (output) {	
+			add_message(output);
+			} else {
+				add_message("");
+			}
+		} 
     }
     else if (strcmp(buffer, "/copy") == 0) {
         copy();
@@ -2082,7 +2198,9 @@ void on_right_click() {
     int nx, ny, nz;
 	int hwb = hit_test(0, s->x, s->y, s->z, s->rx, s->ry, &nx, &ny, &nz);
     
-    if (hy > 0 && hy < BUILD_HEIGHT_LIMIT && is_obstacle(hw) && Inventory_use(&g->inventory, items[g->item_index])) {
+   /* if (ny > 0 && ny < BUILD_HEIGHT_LIMIT && !boom_on_click(hwb) && Inventory_use(&g->inventory, items[g->item_index])) {		
+		sphere((get_block(hx, hy, hz)), 10, Item_EMPTY, nx, ny, nz);
+    } else*/ if (hy > 0 && hy < BUILD_HEIGHT_LIMIT && is_obstacle(hw) && Inventory_use(&g->inventory, items[g->item_index])) {
         if (!player_intersects_block(2, s->x, s->y, s->z, hx, hy, hz)) {
             set_block(hx, hy, hz, items[g->item_index]);
             record_block(hx, hy, hz, items[g->item_index]);
@@ -2622,10 +2740,32 @@ int main(int argc, char **argv) {
     
     // TERMINAL TEST GUI //
     
+    char world;
+    
     // Header generated using -> https://fsymbols.com/generators/tarty/
     printf("\n▒█▀▀▀█ ▒█▀▄▀█ ▀█▀ ▒█▀▀█ ▒█▀▀█ ▒█▀▀▀█ ▒█▄░▒█ \n▒█░░▒█ ▒█▒█▒█ ▒█░ ▒█░░░ ▒█▄▄▀ ▒█░░▒█ ▒█▒█▒█ \n▒█▄▄▄█ ▒█░░▒█ ▄█▄ ▒█▄▄█ ▒█░▒█ ▒█▄▄▄█ ▒█░░▀█ \n		   a game by azekill_DIABLO\n\n");
+    
+    /*
+    printf("> Available World list:");
+    struct dirent *de;  // Pointer for directory entry
+ 
+    // opendir() returns a pointer of DIR type. 
+    DIR *dr = opendir("./world");
+ 
+    // Refer http://pubs.opengroup.org/onlinepubs/7990989775/xsh/readdir.html
+    // for readdir()
+    while ((de = readdir(dr)) != NULL)
+            printf("%s\n", de->d_name);
+    
+    printf("> Enter the name of the world you want to load:");
+    scanf("> %d", &world);
+    printf("> Loading selected world.");
+    */
     printf("> Press RETURN to start");
     getchar();
+
+   
+
     
     // WINDOW INITIALIZATION //
     if (!glfwInit()) {
@@ -2649,14 +2789,15 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
+    glAlphaFunc(GL_GREATER, 0.4);
+    glEnable(GL_ALPHA_TEST);
+	glEnable(GL_CULL_FACE);
     glLogicOp(GL_INVERT);
-    glClearColor(0, 0, 0, 1);
+    glClearColor(0, 0, 0, 0);
 
     //parser_parse_all();
-
-    // LOAD TEXTURES //
+    
     GLuint texture;
     glGenTextures(1, &texture);
     glActiveTexture(GL_TEXTURE0);
@@ -2693,9 +2834,11 @@ int main(int argc, char **argv) {
 
     // LOAD SHADERS //
     Attrib block_attrib = {0};
+    Attrib tblock_attrib = {0};
     Attrib line_attrib = {0};
     Attrib text_attrib = {0};
     Attrib sky_attrib = {0};
+    Attrib sun_attrib = {0};
     GLuint program;
 
     program = load_program(
@@ -2713,6 +2856,22 @@ int main(int argc, char **argv) {
     block_attrib.camera = glGetUniformLocation(program, "camera");
     block_attrib.timer = glGetUniformLocation(program, "timer");
     block_attrib.extra5 = glGetUniformLocation(program, "sky_tint");
+   
+    program = load_program(
+        "shaders/tblock_vertex.glsl", "shaders/tblock_fragment.glsl");
+    tblock_attrib.program = program;
+    tblock_attrib.position = glGetAttribLocation(program, "position");
+    tblock_attrib.normal = glGetAttribLocation(program, "normal");
+    tblock_attrib.uv = glGetAttribLocation(program, "uv");
+    tblock_attrib.matrix = glGetUniformLocation(program, "matrix");
+    tblock_attrib.sampler = glGetUniformLocation(program, "sampler");
+    tblock_attrib.extra1 = glGetUniformLocation(program, "sky_sampler");
+    tblock_attrib.extra2 = glGetUniformLocation(program, "daylight");
+    tblock_attrib.extra3 = glGetUniformLocation(program, "fog_distance");
+    tblock_attrib.extra4 = glGetUniformLocation(program, "ortho");
+    tblock_attrib.camera = glGetUniformLocation(program, "camera");
+    tblock_attrib.timer = glGetUniformLocation(program, "timer");
+    tblock_attrib.extra5 = glGetUniformLocation(program, "sky_tint");
 
     program = load_program(
         "shaders/line_vertex.glsl", "shaders/line_fragment.glsl");
@@ -2739,6 +2898,17 @@ int main(int argc, char **argv) {
     sky_attrib.sampler = glGetUniformLocation(program, "sampler");
     sky_attrib.timer = glGetUniformLocation(program, "timer");
     sky_attrib.extra1 = glGetUniformLocation(program, "sky_tint");
+    
+    /*program = load_program(
+        "shaders/sun_vertex.glsl", "shaders/sun_fragment.glsl");
+    sun_attrib.program = program;
+    sun_attrib.position = glGetAttribLocation(program, "position");
+    sun_attrib.normal = glGetAttribLocation(program, "normal");
+    sun_attrib.uv = glGetAttribLocation(program, "uv");
+    sun_attrib.matrix = glGetUniformLocation(program, "matrix");
+    sun_attrib.sampler = glGetUniformLocation(program, "sampler");
+    sun_attrib.timer = glGetUniformLocation(program, "timer");
+    sun_attrib.extra1 = glGetUniformLocation(program, "sky_tint");*/
 
     // CHECK COMMAND LINE ARGUMENTS //
     if (argc == 2 || argc == 3) {
@@ -2885,6 +3055,7 @@ int main(int argc, char **argv) {
             render_sky(&sky_attrib, player, sky_buffer);
             glClear(GL_DEPTH_BUFFER_BIT);
             int face_count = render_chunks(&block_attrib, player);
+            render_chunks(&tblock_attrib, player);
             render_signs(&text_attrib, player);
             render_sign(&text_attrib, player);
             render_players(&block_attrib, player);
@@ -2974,6 +3145,7 @@ int main(int argc, char **argv) {
                 render_sky(&sky_attrib, player, sky_buffer);
                 glClear(GL_DEPTH_BUFFER_BIT);
                 render_chunks(&block_attrib, player);
+                render_chunks(&tblock_attrib, player);
                 render_signs(&text_attrib, player);
                 render_players(&block_attrib, player);
                 glClear(GL_DEPTH_BUFFER_BIT);
@@ -3000,15 +3172,15 @@ int main(int argc, char **argv) {
 			advance_cursor();
         }
 
-        // SHUTDOWN //
+        // SHUTDOWN // There's a segfault in this sequence
         printf("\n\n[Omicron] The game is closing ... Have a good day!\n");
         db_save_state(s->x, s->y, s->z, s->rx, s->ry);
-        db_close();
-        db_disable();
+        db_close(); // suspect #1
+        db_disable(); // suspect #2
         client_stop();
         client_disable();
         del_buffer(sky_buffer);
-        delete_all_chunks();
+        delete_all_chunks(); // suspect #3
         delete_all_players();
     }
 

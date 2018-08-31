@@ -33,11 +33,11 @@ mach-o/dyld.h
 /home/tux/Dev ++/Omicron/deps/lodepng/lodepng.c
 lodepng.h
 /home/tux/Dev ++/Omicron/deps/lodepng/lodepng.h
+limits.h
+-
 stdio.h
 -
 stdlib.h
--
-fstream
 -
 
 /home/tux/Dev ++/Omicron/deps/lodepng/lodepng.h
@@ -299,6 +299,8 @@ time.h
 -
 unistd.h
 -
+dirent.h
+-
 attrib.h
 /home/tux/Dev ++/Omicron/src/attrib.h
 auth.h
@@ -497,20 +499,6 @@ noise.h
 /home/tux/Dev ++/Omicron/src/item.h
 
 /home/tux/Dev ++/Omicron/src/worldgen/biome_mesa.h
-world.h
-/home/tux/Dev ++/Omicron/src/worldgen/world.h
-
-/home/tux/Dev ++/Omicron/src/worldgen/biome_ocean.c
-biome_ocean.h
-/home/tux/Dev ++/Omicron/src/worldgen/biome_ocean.h
-noise.h
-/home/tux/Dev ++/Omicron/src/worldgen/noise.h
-../config.h
-/home/tux/Dev ++/Omicron/src/config.h
-../item.h
-/home/tux/Dev ++/Omicron/src/item.h
-
-/home/tux/Dev ++/Omicron/src/worldgen/biome_ocean.h
 world.h
 /home/tux/Dev ++/Omicron/src/worldgen/world.h
 
