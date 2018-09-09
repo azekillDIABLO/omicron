@@ -254,6 +254,13 @@ CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o: src/worldgen/biome_rai
 CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o: src/worldgen/world.h
 CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o: deps/noise/noise.h
 
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o: src/config.h
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o: src/item.h
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o: src/worldgen/biome_swamp.c
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o: src/worldgen/biome_swamp.h
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o: src/worldgen/world.h
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o: deps/noise/noise.h
+
 CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o: src/config.h
 CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o: src/item.h
 CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o: src/worldgen/biome_taiga.c
@@ -275,6 +282,7 @@ CMakeFiles/omicron.dir/src/worldgen/world.c.o: src/worldgen/base_terrain.h
 CMakeFiles/omicron.dir/src/worldgen/world.c.o: src/worldgen/biome_desert.h
 CMakeFiles/omicron.dir/src/worldgen/world.c.o: src/worldgen/biome_mesa.h
 CMakeFiles/omicron.dir/src/worldgen/world.c.o: src/worldgen/biome_rainforest.h
+CMakeFiles/omicron.dir/src/worldgen/world.c.o: src/worldgen/biome_swamp.h
 CMakeFiles/omicron.dir/src/worldgen/world.c.o: src/worldgen/biome_taiga.h
 CMakeFiles/omicron.dir/src/worldgen/world.c.o: src/worldgen/biome_temperate.h
 CMakeFiles/omicron.dir/src/worldgen/world.c.o: src/worldgen/world.c

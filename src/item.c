@@ -4,12 +4,16 @@
 const int items[] = {
     // items the user can build
     Item_GRASS,
+    Item_SWAMP_GRASS,
     Item_SAND,
+    Item_SANDSTONE,
+    Item_SANDSTONE_BRICKS,
     Item_STONEBRICK,
     Item_SLAB_LOWER_STONEBRICK,
     Item_BRICK,
     Item_WOOD,
     Item_STONE,
+    Item_STONE_BRICKS,
     Item_DIRT,
     Item_PLANK,
     Item_SNOW,
@@ -20,6 +24,7 @@ const int items[] = {
     Item_CHEST,
     Item_TNT,
     Item_LEAVES,
+    Item_CLAY,
     //Item_CLOUD,
     //Item_CORESHELL,
     Item_WATER,
@@ -37,6 +42,7 @@ const int items[] = {
     
     //Flowers
     Item_TALL_GRASS,
+    Item_SWAMP_TALL_GRASS,
     Item_YELLOW_FLOWER,
     Item_RED_FLOWER,
     Item_PURPLE_FLOWER,
@@ -45,6 +51,9 @@ const int items[] = {
     Item_BLUE_FLOWER,
     Item_VINE,
     Item_CACTI,
+    Item_FERN,
+    Item_MUSHROOM,
+    Item_MUSHROOMS,
     
     //Colors
     Item_COLOR_00,
@@ -96,7 +105,7 @@ const int blocks[256][6] = {
     {7, 7, 7, 7, 7, 7}, // 8 - plank
     {24, 24, 40, 8, 24, 24}, // 9 - snow
     {9, 9, 9, 9, 9, 9}, // 10 - glass
-    {10, 10, 10, 10, 10, 10}, // 11 - cobble
+    {21, 21, 21, 21, 21, 21}, // 11 - cobble
     {11, 11, 11, 11, 11, 11}, // 12 - light stone
     {12, 12, 12, 12, 12, 12}, // 13 - dark stone
     {13, 13, 13, 13, 13, 13}, // 14 - chest
@@ -173,6 +182,15 @@ const int blocks[256][6] = {
     {83, 83, 83, 83, 83, 83}, // 78 - rubis block 
     {213, 213, 213, 213, 213, 213}, // 79 - ice 
     {214, 214, 215, 216, 214, 214}, // 80 - TNT 
+    {17, 17, 17, 17, 17, 17}, // 81 - sandstone 
+    {33, 33, 33, 33, 33, 33}, // 82 - sandstone bricks
+    {10, 10, 10, 10, 10, 10}, // 83 - stone bricks
+    {34, 34, 34, 34, 34, 34}, // 85 - clay
+    {0, 0, 0, 0, 0, 0}, // 86
+    {0, 0, 0, 0, 0, 0}, // 87
+    {0, 0, 0, 0, 0, 0}, // 88
+    {19, 19, 35, 0, 19, 19}, // 89 - swamp dirt
+    {0, 0, 0, 0, 0, 0}, // 90
     {0, 0, 0, 0, 0, 0} // - empty
 };
 
@@ -194,7 +212,17 @@ const int plants[256] = {
     0, 0, // 24 - 65
     
     55, // 66 - vine
-    56 // 67 - cacti
+    56, // 67 - cacti
+    
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, // 68 - 85
+    
+    57, // 86 - fern
+    58, // 87 - mushroom
+    59, // 88 - mushroom patch
+    0,
+	60 // 90 - swamp tall grass
+    
 };
 
 int is_plant(int w) {
@@ -208,6 +236,10 @@ int is_plant(int w) {
         case Item_BLUE_FLOWER:
         case Item_VINE:
         case Item_CACTI:
+        case Item_FERN:
+        case Item_MUSHROOM:
+        case Item_MUSHROOMS:
+        case Item_SWAMP_TALL_GRASS:
             return 1;
         default:
             return 0;
@@ -250,6 +282,17 @@ int is_transparent(int w) {
         case Item_WATER: //Just to stop Xray-ing
             return 1;
         default:
+            return 0;
+    }
+}
+
+int is_invisible(int w) {
+    if (w == Item_EMPTY) {
+        return 1;
+    }
+    w = ABS(w);
+    switch (w) {
+		default:
             return 0;
     }
 }

@@ -4,11 +4,14 @@
 #include "../item.h"
 
 void generateDesert(int dx, int dz, int x, int z, int start_h, int h, int flag, world_func func, void *arg) {  
-	for (int y = start_h; y < h; y++) {
-		func(x, y, z, 2 * flag, arg);
+	for (int y = start_h; y < h - 1; y++) {
+		func(x, y, z, Item_SANDSTONE * flag, arg);
 	}
-	
-	if (simplex2(x * 0.00091, z * 0.00091, 6, 1, 2) < 0.5) {
+	for (int y = 0; y < 5; y++) {
+		func(x, h-y-1, z, Item_SAND * flag, arg);
+	}
+     
+    if (h > 45) {
 
 		// flower
 		if (simplex2(-x * 0.1, z * 0.1, 4, 0.8, 2) > 0.8) {
@@ -16,7 +19,7 @@ void generateDesert(int dx, int dz, int x, int z, int start_h, int h, int flag, 
 		}
 
 		// cacti
-		if (simplex2(-x * 0.1, z * 0.1, 3, 0.9, 2) > 0.85) {
+		if (simplex2(-x * 0.1, z * 0.1, 3, 0.9, 2) > 0.8) {
 			func(x, h, z, 67 * flag, arg); 
 		}
 
@@ -55,5 +58,14 @@ void generateDesert(int dx, int dz, int x, int z, int start_h, int h, int flag, 
 				func(x, h + height - 3 + oz, z - 2, Item_CACTUS, arg);
 			}
 		}
+		int px = 42;
+		int pz = 42;
+		/*Pyramid prototype
+		for (int p = 50; p = 0; p--) {
+			for (int p2 = 50; p2 = 0; p2--) {
+				func(dx + p + p2, 82, dz + p2, Item_SANDSTONE_BRICKS * flag, arg);
+			}
+		}*/
+		//func(dx + p + p2, 82, dz + p2, Item_SANDSTONE_BRICKS * flag, arg);
 	}
 }

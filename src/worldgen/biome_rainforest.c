@@ -5,11 +5,19 @@
 
 void generateRainforest(int dx, int dz, int x, int z, int start_h, int h, int flag, world_func func, void *arg) {
     for (int y = start_h; y < h - 1; y++) {
-        func(x, y, z, Item_DIRT * flag, arg);
-    }
-    func(x, h - 1, z, Item_GRASS * flag, arg);
+		func(x, y, z, Item_STONE * flag, arg);
+	}
+	for (int y = 0; y < 5; y++) {
+		func(x, h-y-1, z, Item_SAND * flag, arg);
+	}
+     
+    if (h > 46) {
     
-    if (simplex2(x * 0.00091, z * 0.00091, 6, 1, 2) < 0.5) {
+		for (int y = start_h; y < h - 1; y++) {
+			func(x, y, z, Item_DIRT * flag, arg);
+		}
+		func(x, h - 1, z, Item_GRASS * flag, arg);
+    
 
 		// grass
 		if (simplex2(-x * 0.1, z * 0.1, 4, 0.8, 2) > 0.5) {

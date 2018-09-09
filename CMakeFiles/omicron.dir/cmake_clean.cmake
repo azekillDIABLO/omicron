@@ -17,6 +17,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/omicron.dir/src/worldgen/biome_desert.c.o"
   "CMakeFiles/omicron.dir/src/worldgen/biome_mesa.c.o"
   "CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o"
+  "CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o"
   "CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o"
   "CMakeFiles/omicron.dir/src/worldgen/biome_temperate.c.o"
   "CMakeFiles/omicron.dir/src/worldgen/world.c.o"

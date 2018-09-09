@@ -824,6 +824,7 @@ int umap_get_block(Map *map, int x, int y, int z) { //optimized function for use
 void compute_chunk(WorkerItem *item) {
     char *opaque = (char *)calloc(XZ_SIZE * XZ_SIZE * Y_SIZE, sizeof(char));
     char *visible = (char *)calloc(XZ_SIZE * XZ_SIZE * Y_SIZE, sizeof(char));
+    char *transparent = (char *)calloc(XZ_SIZE * XZ_SIZE * Y_SIZE, sizeof(char));
     char *light = (char *)calloc(XZ_SIZE * XZ_SIZE * Y_SIZE, sizeof(char));
     char *highest = (char *)calloc(XZ_SIZE * XZ_SIZE, sizeof(char));
 
@@ -866,7 +867,8 @@ void compute_chunk(WorkerItem *item) {
                 }
                 // END TODO
 				opaque[XYZ(x, y, z)] = !is_transparent(w);
-				visible[XYZ(x, y, z)] = is_liquid(w);
+				transparent[XYZ(x, y, z)] = is_transparent(w); // dupe needed
+				visible[XYZ(x, y, z)] = !is_invisible(w); //needs modification to avoid border bugs...
                 
                 if (opaque[XYZ(x, y, z)]) {
                     highest[XZ(x, z)] = MAX(highest[XZ(x, z)], y);
@@ -916,14 +918,21 @@ void compute_chunk(WorkerItem *item) {
 		int f5 = !opaque[XYZ(x, y, z - 1)];
 		int f6 = !opaque[XYZ(x, y, z + 1)];
 		
-		int v1 = !visible[XYZ(x - 1, y, z)];
-		int v2 = !visible[XYZ(x + 1, y, z)];
-		int v3 = !visible[XYZ(x, y + 1, z)];
-		int v4 = !visible[XYZ(x, y - 1, z)] && (ey > 0);
-		int v5 = !visible[XYZ(x, y, z - 1)];
-		int v6 = !visible[XYZ(x, y, z + 1)];
+		int v1 = !transparent[XYZ(x - 1, y, z)];
+		int v2 = !transparent[XYZ(x + 1, y, z)];
+		int v3 = !transparent[XYZ(x, y + 1, z)];
+		int v4 = !transparent[XYZ(x, y - 1, z)] && (ey > 0);
+		int v5 = !transparent[XYZ(x, y, z - 1)];
+		int v6 = !transparent[XYZ(x, y, z + 1)];
+		
+		int i1 = visible[XYZ(x - 1, y, z)];
+		int i2 = visible[XYZ(x + 1, y, z)];
+		int i3 = visible[XYZ(x, y + 1, z)];
+		int i4 = visible[XYZ(x, y - 1, z)] && (ey > 0);
+		int i5 = visible[XYZ(x, y, z - 1)];
+		int i6 = visible[XYZ(x, y, z + 1)];
         
-        if (is_liquid(ew)) {
+        if (is_transparent(ew) && !is_invisible(ew)) {
 			if (v1 == 0) {
 				f1 = 0;
 			}
@@ -943,7 +952,29 @@ void compute_chunk(WorkerItem *item) {
 			}
 			if (v6 == 0) {
 				f6 = 0;
-			}			
+			}		
+			
+			//air check
+			if (i1 == 0) {
+				f1 = 1;
+			}
+			if (i2 == 0) {
+				f2 = 1;
+			}
+			
+			if (i3 == 0) {
+				f3 = 1;
+			}
+			if (i4 == 0) {
+				f4 = 1;
+			}
+					
+			if (i5 == 0) {
+				f5 = 1;
+			}
+			if (i6 == 0) {
+				f6 = 1;
+			}		
 		}	
         
         int total = f1 + f2 + f3 + f4 + f5 + f6;
@@ -976,14 +1007,21 @@ void compute_chunk(WorkerItem *item) {
         int f5 = !opaque[XYZ(x, y, z - 1)];
         int f6 = !opaque[XYZ(x, y, z + 1)];
         
-		int v1 = !visible[XYZ(x - 1, y, z)];
-		int v2 = !visible[XYZ(x + 1, y, z)];
-		int v3 = !visible[XYZ(x, y + 1, z)];
-		int v4 = !visible[XYZ(x, y - 1, z)] && (ey > 0);
-		int v5 = !visible[XYZ(x, y, z - 1)];
-		int v6 = !visible[XYZ(x, y, z + 1)];
+		int v1 = !transparent[XYZ(x - 1, y, z)];
+		int v2 = !transparent[XYZ(x + 1, y, z)];
+		int v3 = !transparent[XYZ(x, y + 1, z)];
+		int v4 = !transparent[XYZ(x, y - 1, z)] && (ey > 0);
+		int v5 = !transparent[XYZ(x, y, z - 1)];
+		int v6 = !transparent[XYZ(x, y, z + 1)];
 		
-		if (is_liquid(ew)) {
+		int i1 = visible[XYZ(x - 1, y, z)];
+		int i2 = visible[XYZ(x + 1, y, z)];
+		int i3 = visible[XYZ(x, y + 1, z)];
+		int i4 = visible[XYZ(x, y - 1, z)] && (ey > 0);
+		int i5 = visible[XYZ(x, y, z - 1)];
+		int i6 = visible[XYZ(x, y, z + 1)];
+        
+        if (is_transparent(ew) && !is_invisible(ew)) {
 			if (v1 == 0) {
 				f1 = 0;
 			}
@@ -1003,8 +1041,30 @@ void compute_chunk(WorkerItem *item) {
 			}
 			if (v6 == 0) {
 				f6 = 0;
-			}			
-		}	
+			}	
+			
+			//air check
+			if (i1 == 0) {
+				f1 = 1;
+			}
+			if (i2 == 0) {
+				f2 = 1;
+			}
+			
+			if (i3 == 0) {
+				f3 = 1;
+			}
+			if (i4 == 0) {
+				f4 = 1;
+			}
+					
+			if (i5 == 0) {
+				f5 = 1;
+			}
+			if (i6 == 0) {
+				f6 = 1;
+			}		
+		}			
 			
 		int total = f1 + f2 + f3 + f4 + f5 + f6;
 		
@@ -1070,6 +1130,7 @@ void compute_chunk(WorkerItem *item) {
 
     free(opaque);
     free(visible);
+    free(transparent);
     free(light);
     free(highest);
 
@@ -2551,18 +2612,22 @@ void handle_movement(double dt) {
             } else if (is_liquid(w)) { 
                 				
 				if (is_jump_pressed) {
-                    dy = 2.5f;
+                    dy = 8.0f;
                     //dy = 0;
                 
                 } else if (is_descend_pressed) {
+                    dy = -1.2f;
+                    //dy = 0;
+                        
+                } else {
                     dy = -0.5f;
                     //dy = 0;
                         
-                } 
+                }
                 
-				vx = vx/1.2;
+				vx = vx*0.65;
 				//vy = vy/1.6;
-				vz = vz/1.2;
+				vz = vz*0.65;
                 
             }
             else {
@@ -2743,7 +2808,7 @@ int main(int argc, char **argv) {
     char world;
     
     // Header generated using -> https://fsymbols.com/generators/tarty/
-    printf("\n▒█▀▀▀█ ▒█▀▄▀█ ▀█▀ ▒█▀▀█ ▒█▀▀█ ▒█▀▀▀█ ▒█▄░▒█ \n▒█░░▒█ ▒█▒█▒█ ▒█░ ▒█░░░ ▒█▄▄▀ ▒█░░▒█ ▒█▒█▒█ \n▒█▄▄▄█ ▒█░░▒█ ▄█▄ ▒█▄▄█ ▒█░▒█ ▒█▄▄▄█ ▒█░░▀█ \n		   a game by azekill_DIABLO\n\n");
+    printf("\n▒█▀▀▀█ ▒█▀▄▀█ ▀█▀ ▒█▀▀█ ▒█▀▀█ ▒█▀▀▀█ ▒█▄░▒█ \n▒█░░▒█ ▒█▒█▒█ ▒█░ ▒█░░░ ▒█▄▄▀ ▒█░░▒█ ▒█▒█▒█ \n▒█▄▄▄█ ▒█░░▒█ ▄█▄ ▒█▄▄█ ▒█░▒█ ▒█▄▄▄█ ▒█░░▀█ \n	       a game not by azekill_DIABLO\n\n");
     
     /*
     printf("> Available World list:");
@@ -3071,6 +3136,7 @@ int main(int argc, char **argv) {
             float ty = g->height - ts;
             if (SHOW_ITEM) {
                 render_item(&block_attrib);
+                render_item(&tblock_attrib);
                 render_item_count(&text_attrib, ts);
             }
 

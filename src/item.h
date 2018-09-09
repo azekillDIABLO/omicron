@@ -75,6 +75,15 @@ typedef enum {
 	Item_RUBIS_BLOCK,
 	Item_ICE,
 	Item_TNT,
+	Item_SANDSTONE,
+	Item_SANDSTONE_BRICKS,
+	Item_STONE_BRICKS,
+	Item_CLAY,
+	Item_FERN,
+	Item_MUSHROOM,
+	Item_MUSHROOMS,
+	Item_SWAMP_GRASS,
+	Item_SWAMP_TALL_GRASS,
     Item_max
 } Item;
 
@@ -91,12 +100,13 @@ extern const int plants[256];
 int is_plant(int w);
 int is_obstacle(int w);
 int is_transparent(int w);
+int is_invisible(int w);
 int is_destructable(int w);
 int boom_on_click(int w);
 int is_climbable(int w);
 int is_noncube(int w);
-int is_liquid (int w);
-int buildable_to (int w);
+int is_liquid(int w);
+int buildable_to(int w);
 
 NonCubeType noncube_type(int w);
 

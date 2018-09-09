@@ -7,6 +7,7 @@ typedef enum {
     Biome_RAINFOREST,
     Biome_TAIGA,
     Biome_MESA,
+    Biome_SWAMP,
     Biome_max
 } Biome;
 

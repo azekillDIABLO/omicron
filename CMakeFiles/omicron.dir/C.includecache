@@ -516,6 +516,20 @@ noise.h
 world.h
 /home/tux/Dev ++/Omicron/src/worldgen/world.h
 
+/home/tux/Dev ++/Omicron/src/worldgen/biome_swamp.c
+biome_swamp.h
+/home/tux/Dev ++/Omicron/src/worldgen/biome_swamp.h
+noise.h
+/home/tux/Dev ++/Omicron/src/worldgen/noise.h
+../config.h
+/home/tux/Dev ++/Omicron/src/config.h
+../item.h
+/home/tux/Dev ++/Omicron/src/item.h
+
+/home/tux/Dev ++/Omicron/src/worldgen/biome_swamp.h
+world.h
+/home/tux/Dev ++/Omicron/src/worldgen/world.h
+
 /home/tux/Dev ++/Omicron/src/worldgen/biome_taiga.c
 biome_taiga.h
 /home/tux/Dev ++/Omicron/src/worldgen/biome_taiga.h
@@ -575,6 +589,8 @@ biome_taiga.h
 /home/tux/Dev ++/Omicron/src/worldgen/biome_taiga.h
 biome_mesa.h
 /home/tux/Dev ++/Omicron/src/worldgen/biome_mesa.h
+biome_swamp.h
+/home/tux/Dev ++/Omicron/src/worldgen/biome_swamp.h
 
 /home/tux/Dev ++/Omicron/src/worldgen/world.h
 

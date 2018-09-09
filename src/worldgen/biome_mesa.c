@@ -33,7 +33,7 @@ void generateMesa(int dx, int dz, int x, int z, int start_h, int h, int flag, wo
 			
 			// I don't even know why it does this but it looks sick
 			if (simplex2(x * 0.005, -z * 0.005, 4, 0.8, 2) > 0.7) {
-				if (h = 67) {
+				if (h == 67) {
 					func(x, h, z, Item_DIRT * flag, arg);
 				}
 			}

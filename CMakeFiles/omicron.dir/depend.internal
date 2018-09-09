@@ -254,6 +254,13 @@ CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o
  /home/tux/Dev ++/Omicron/src/worldgen/biome_rainforest.h
  /home/tux/Dev ++/Omicron/src/worldgen/world.h
  deps/noise/noise.h
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o
+ /home/tux/Dev ++/Omicron/src/config.h
+ /home/tux/Dev ++/Omicron/src/item.h
+ /home/tux/Dev ++/Omicron/src/worldgen/biome_swamp.c
+ /home/tux/Dev ++/Omicron/src/worldgen/biome_swamp.h
+ /home/tux/Dev ++/Omicron/src/worldgen/world.h
+ deps/noise/noise.h
 CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o
  /home/tux/Dev ++/Omicron/src/config.h
  /home/tux/Dev ++/Omicron/src/item.h
@@ -276,6 +283,7 @@ CMakeFiles/omicron.dir/src/worldgen/world.c.o
  /home/tux/Dev ++/Omicron/src/worldgen/biome_desert.h
  /home/tux/Dev ++/Omicron/src/worldgen/biome_mesa.h
  /home/tux/Dev ++/Omicron/src/worldgen/biome_rainforest.h
+ /home/tux/Dev ++/Omicron/src/worldgen/biome_swamp.h
  /home/tux/Dev ++/Omicron/src/worldgen/biome_taiga.h
  /home/tux/Dev ++/Omicron/src/worldgen/biome_temperate.h
  /home/tux/Dev ++/Omicron/src/worldgen/world.c

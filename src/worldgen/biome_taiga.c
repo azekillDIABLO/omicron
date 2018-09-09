@@ -3,22 +3,29 @@
 #include "../config.h"
 #include "../item.h"
 
-void generateTaiga(int dx, int dz, int x, int z, int start_h, int h, int flag, world_func func, void *arg) {
-    /* ice on water
-	if (simplex2(-x * 0.1, z * 0.1, 6, 0.6, 2) > 0.68) {
-		func(x, 36, z, Item_ICE * flag, arg);
-	}
-    */
+void generateTaiga(int dx, int dz, int x, int z, int start_h, int h, int flag, world_func func, void *arg) {  
     for (int y = start_h; y < h - 1; y++) {
-        func(x, y, z, Item_DIRT * flag, arg);
-    }
-    func(x, h - 1, z, Item_SNOW * flag, arg);
-    
-    if (simplex2(x * 0.00091, z * 0.00091, 6, 1, 2) < 0.5) {
+		func(x, y, z, Item_STONE * flag, arg);
+	}
+	for (int y = 0; y < 5; y++) {
+		func(x, h-y-1, z, Item_SAND * flag, arg);
+	}
+     
+    if (h > 46) {
 
+		for (int y = start_h; y < h - 1; y++) {
+			func(x, y, z, Item_DIRT * flag, arg);
+		}
+		func(x, h - 1, z, Item_SNOW * flag, arg);
+    
 		// grass
-		if (simplex2(-x * 0.1, z * 0.1, 4, 0.8, 2) > 0.7) {
+		if (simplex2(-x * 0.1, z * 0.1, 4, 0.8, 2) > 0.71) {
 			func(x, h, z, 17 * flag, arg);
+		}
+		
+		// ferns
+		if (simplex2(-x * 0.1, z * 0.1, 5, 0.5, 2) > 0.715) {
+			func(x, h, z, Item_FERN * flag, arg);
 		}
 		
 		

@@ -489,9 +489,33 @@ CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o.provides: CMakeFiles/om
 CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o.provides.build: CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o
 
 
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o: CMakeFiles/omicron.dir/flags.make
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o: src/worldgen/biome_swamp.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o   -c "/home/tux/Dev ++/Omicron/src/worldgen/biome_swamp.c"
+
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.i"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/tux/Dev ++/Omicron/src/worldgen/biome_swamp.c" > CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.i
+
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.s"
+	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/tux/Dev ++/Omicron/src/worldgen/biome_swamp.c" -o CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.s
+
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o.requires:
+
+.PHONY : CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o.requires
+
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o.provides: CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o.requires
+	$(MAKE) -f CMakeFiles/omicron.dir/build.make CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o.provides.build
+.PHONY : CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o.provides
+
+CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o.provides.build: CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o
+
+
 CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o: CMakeFiles/omicron.dir/flags.make
 CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o: src/worldgen/biome_taiga.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o   -c "/home/tux/Dev ++/Omicron/src/worldgen/biome_taiga.c"
 
 CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.i: cmake_force
@@ -515,7 +539,7 @@ CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o.provides.build: CMakeFiles/o
 
 CMakeFiles/omicron.dir/src/worldgen/biome_temperate.c.o: CMakeFiles/omicron.dir/flags.make
 CMakeFiles/omicron.dir/src/worldgen/biome_temperate.c.o: src/worldgen/biome_temperate.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/omicron.dir/src/worldgen/biome_temperate.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_21) "Building C object CMakeFiles/omicron.dir/src/worldgen/biome_temperate.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/omicron.dir/src/worldgen/biome_temperate.c.o   -c "/home/tux/Dev ++/Omicron/src/worldgen/biome_temperate.c"
 
 CMakeFiles/omicron.dir/src/worldgen/biome_temperate.c.i: cmake_force
@@ -539,7 +563,7 @@ CMakeFiles/omicron.dir/src/worldgen/biome_temperate.c.o.provides.build: CMakeFil
 
 CMakeFiles/omicron.dir/src/worldgen/world.c.o: CMakeFiles/omicron.dir/flags.make
 CMakeFiles/omicron.dir/src/worldgen/world.c.o: src/worldgen/world.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_21) "Building C object CMakeFiles/omicron.dir/src/worldgen/world.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_22) "Building C object CMakeFiles/omicron.dir/src/worldgen/world.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/omicron.dir/src/worldgen/world.c.o   -c "/home/tux/Dev ++/Omicron/src/worldgen/world.c"
 
 CMakeFiles/omicron.dir/src/worldgen/world.c.i: cmake_force
@@ -563,7 +587,7 @@ CMakeFiles/omicron.dir/src/worldgen/world.c.o.provides.build: CMakeFiles/omicron
 
 CMakeFiles/omicron.dir/deps/glew/src/glew.c.o: CMakeFiles/omicron.dir/flags.make
 CMakeFiles/omicron.dir/deps/glew/src/glew.c.o: deps/glew/src/glew.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_22) "Building C object CMakeFiles/omicron.dir/deps/glew/src/glew.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_23) "Building C object CMakeFiles/omicron.dir/deps/glew/src/glew.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/omicron.dir/deps/glew/src/glew.c.o   -c "/home/tux/Dev ++/Omicron/deps/glew/src/glew.c"
 
 CMakeFiles/omicron.dir/deps/glew/src/glew.c.i: cmake_force
@@ -587,7 +611,7 @@ CMakeFiles/omicron.dir/deps/glew/src/glew.c.o.provides.build: CMakeFiles/omicron
 
 CMakeFiles/omicron.dir/deps/lodepng/lodepng.c.o: CMakeFiles/omicron.dir/flags.make
 CMakeFiles/omicron.dir/deps/lodepng/lodepng.c.o: deps/lodepng/lodepng.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_23) "Building C object CMakeFiles/omicron.dir/deps/lodepng/lodepng.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_24) "Building C object CMakeFiles/omicron.dir/deps/lodepng/lodepng.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/omicron.dir/deps/lodepng/lodepng.c.o   -c "/home/tux/Dev ++/Omicron/deps/lodepng/lodepng.c"
 
 CMakeFiles/omicron.dir/deps/lodepng/lodepng.c.i: cmake_force
@@ -611,7 +635,7 @@ CMakeFiles/omicron.dir/deps/lodepng/lodepng.c.o.provides.build: CMakeFiles/omicr
 
 CMakeFiles/omicron.dir/deps/noise/noise.c.o: CMakeFiles/omicron.dir/flags.make
 CMakeFiles/omicron.dir/deps/noise/noise.c.o: deps/noise/noise.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_24) "Building C object CMakeFiles/omicron.dir/deps/noise/noise.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_25) "Building C object CMakeFiles/omicron.dir/deps/noise/noise.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/omicron.dir/deps/noise/noise.c.o   -c "/home/tux/Dev ++/Omicron/deps/noise/noise.c"
 
 CMakeFiles/omicron.dir/deps/noise/noise.c.i: cmake_force
@@ -635,7 +659,7 @@ CMakeFiles/omicron.dir/deps/noise/noise.c.o.provides.build: CMakeFiles/omicron.d
 
 CMakeFiles/omicron.dir/deps/sqlite/sqlite3.c.o: CMakeFiles/omicron.dir/flags.make
 CMakeFiles/omicron.dir/deps/sqlite/sqlite3.c.o: deps/sqlite/sqlite3.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_25) "Building C object CMakeFiles/omicron.dir/deps/sqlite/sqlite3.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_26) "Building C object CMakeFiles/omicron.dir/deps/sqlite/sqlite3.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/omicron.dir/deps/sqlite/sqlite3.c.o   -c "/home/tux/Dev ++/Omicron/deps/sqlite/sqlite3.c"
 
 CMakeFiles/omicron.dir/deps/sqlite/sqlite3.c.i: cmake_force
@@ -659,7 +683,7 @@ CMakeFiles/omicron.dir/deps/sqlite/sqlite3.c.o.provides.build: CMakeFiles/omicro
 
 CMakeFiles/omicron.dir/deps/tinycthread/tinycthread.c.o: CMakeFiles/omicron.dir/flags.make
 CMakeFiles/omicron.dir/deps/tinycthread/tinycthread.c.o: deps/tinycthread/tinycthread.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_26) "Building C object CMakeFiles/omicron.dir/deps/tinycthread/tinycthread.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_27) "Building C object CMakeFiles/omicron.dir/deps/tinycthread/tinycthread.c.o"
 	/usr/bin/cc  $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/omicron.dir/deps/tinycthread/tinycthread.c.o   -c "/home/tux/Dev ++/Omicron/deps/tinycthread/tinycthread.c"
 
 CMakeFiles/omicron.dir/deps/tinycthread/tinycthread.c.i: cmake_force
@@ -701,6 +725,7 @@ omicron_OBJECTS = \
 "CMakeFiles/omicron.dir/src/worldgen/biome_desert.c.o" \
 "CMakeFiles/omicron.dir/src/worldgen/biome_mesa.c.o" \
 "CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o" \
+"CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o" \
 "CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o" \
 "CMakeFiles/omicron.dir/src/worldgen/biome_temperate.c.o" \
 "CMakeFiles/omicron.dir/src/worldgen/world.c.o" \
@@ -731,6 +756,7 @@ omicron: CMakeFiles/omicron.dir/src/worldgen/base_terrain.c.o
 omicron: CMakeFiles/omicron.dir/src/worldgen/biome_desert.c.o
 omicron: CMakeFiles/omicron.dir/src/worldgen/biome_mesa.c.o
 omicron: CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o
+omicron: CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o
 omicron: CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o
 omicron: CMakeFiles/omicron.dir/src/worldgen/biome_temperate.c.o
 omicron: CMakeFiles/omicron.dir/src/worldgen/world.c.o
@@ -762,7 +788,7 @@ omicron: /usr/lib/x86_64-linux-gnu/libXcursor.so
 omicron: /usr/lib/x86_64-linux-gnu/libGL.so
 omicron: /usr/lib/x86_64-linux-gnu/libcurl.so
 omicron: CMakeFiles/omicron.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_27) "Linking C executable omicron"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/tux/Dev ++/Omicron/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_28) "Linking C executable omicron"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/omicron.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -788,6 +814,7 @@ CMakeFiles/omicron.dir/requires: CMakeFiles/omicron.dir/src/worldgen/base_terrai
 CMakeFiles/omicron.dir/requires: CMakeFiles/omicron.dir/src/worldgen/biome_desert.c.o.requires
 CMakeFiles/omicron.dir/requires: CMakeFiles/omicron.dir/src/worldgen/biome_mesa.c.o.requires
 CMakeFiles/omicron.dir/requires: CMakeFiles/omicron.dir/src/worldgen/biome_rainforest.c.o.requires
+CMakeFiles/omicron.dir/requires: CMakeFiles/omicron.dir/src/worldgen/biome_swamp.c.o.requires
 CMakeFiles/omicron.dir/requires: CMakeFiles/omicron.dir/src/worldgen/biome_taiga.c.o.requires
 CMakeFiles/omicron.dir/requires: CMakeFiles/omicron.dir/src/worldgen/biome_temperate.c.o.requires
 CMakeFiles/omicron.dir/requires: CMakeFiles/omicron.dir/src/worldgen/world.c.o.requires

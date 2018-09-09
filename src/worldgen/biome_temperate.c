@@ -4,13 +4,18 @@
 #include "../item.h"
 
 void generateTemperate(int dx, int dz, int x, int z, int start_h, int h, int flag, world_func func, void *arg) {
-    
-    for (int y = start_h; y < h - 1; y++) {	
-        func(x, y, z, Item_DIRT * flag, arg);
-    }
-    func(x, h - 1, z, Item_GRASS * flag, arg); 
-    
-    if (simplex2(x * 0.00091, z * 0.00091, 6, 1, 2) < 0.5) {
+    for (int y = start_h; y < h - 1; y++) {
+		func(x, y, z, Item_STONE * flag, arg);
+	}
+	for (int y = 0; y < 5; y++) {
+		func(x, h-y-1, z, Item_SAND * flag, arg);
+	}
+     
+    if (h > 46) {
+		for (int y = start_h; y < h - 1; y++) {	
+			func(x, y, z, Item_DIRT * flag, arg);
+		}
+		func(x, h - 1, z, Item_GRASS * flag, arg); 
 
 		// grass
 		if (simplex2(-x * 0.1, z * 0.1, 4, 0.8, 2) > 0.5) {
@@ -37,7 +42,13 @@ void generateTemperate(int dx, int dz, int x, int z, int start_h, int h, int fla
 
 		// forests
 		if (simplex2(-x * 0.001, z * 0.001, 6, 0.9, 2) > 0.59) {
-			//func(x, h, z, 35 * flag, arg);
+			// mushrooms
+			if (simplex2(-x * 0.08, z * 0.08, 6, 0.7, 2) > 0.69) {
+				func(x, h, z, Item_MUSHROOMS * flag, arg);
+			}
+			if (simplex2(-x * 0.1, z * 0.1, 5, 0.8, 2) > 0.66) {
+				func(x, h, z, Item_MUSHROOM * flag, arg);
+			}
 			// trees
 			if (h > 38) {
 				int ok = 1;
