@@ -49,6 +49,7 @@ void generateTemperate(int dx, int dz, int x, int z, int start_h, int h, int fla
 			if (simplex2(-x * 0.1, z * 0.1, 5, 0.8, 2) > 0.66) {
 				func(x, h, z, Item_MUSHROOM * flag, arg);
 			}
+			
 			// trees
 			if (h > 38) {
 				int ok = 1;
@@ -57,7 +58,8 @@ void generateTemperate(int dx, int dz, int x, int z, int start_h, int h, int fla
 				{
 					ok = 0;
 				}
-
+				
+				// small trees
 				if (ok && simplex2(x, z, 6, 0.5, 2) > 0.71) {
 					for (int y = h + 3; y < h + 8; y++) {
 						for (int ox = -3; ox <= 3; ox++) {
@@ -74,17 +76,8 @@ void generateTemperate(int dx, int dz, int x, int z, int start_h, int h, int fla
 						func(x, y, z, 5, arg);
 					}
 				}
-			}
 
-			// elder trees
-			if (h > 38) {
-				int ok = 1;
-				if (dx - 4 < 0 || dz - 4 < 0 ||
-					dx + 4 >= CHUNK_SIZE || dz + 4 >= CHUNK_SIZE)
-				{
-					ok = 0;
-				}
-
+				// elder trees
 				if (ok && simplex2(x, z, 7, 0.6, 2) > 0.82) {
 					for (int y = h + 4; y < h + 18; y++) {
 						for (int ox = -4; ox <= 4; ox++) {
@@ -97,26 +90,15 @@ void generateTemperate(int dx, int dz, int x, int z, int start_h, int h, int fla
 							}
 						}
 					}
-					for (int y = h; y < h + 10; y++) {		
+					for (int y = h-1; y < h + 9; y++) {		
 						func(x, y, z, 5, arg);
 					}
-					/*for (int tx = x - 2; tx > x + 2; tx++) {		
-						func(tx, h+8, z, 5, arg);
+					for (int i = 0; i < 5; i++) {
+						func(x+i-2, h+4, z+i-2, 5, arg);
+						func(x-i+2, h+4, z+i-2, 5, arg);
 					}
-					for (int tz = z - 2; tz > z + 2; tz++) {
-						func(x, h+8, tz, 5, arg);
-					}*/
 				}
 			}
 		}
-
-		// some wip ugly river don't touch the water is lava
-		/*
-		if (simplex2(-x * 0.001, z * 0.001, 4, 0.8, 2) > 0.7) {
-			//if (h < 38) {
-				func(x, h, z, 42 * flag, arg);
-			//}
-		}
-		*/
-    }
+	}
 }

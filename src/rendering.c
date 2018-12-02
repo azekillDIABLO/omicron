@@ -28,6 +28,28 @@ GLuint gen_text_buffer(float x, float y, float n, char *text) {
     return gen_faces(4, length, data);
 }
 
+GLuint gen_ui_buffer(float x, float y, float n, char spritesheet_index) {
+    /** Thanks CraftNG :D **/
+    GLfloat *data = malloc_faces(4, 1);
+    //make_character(data, x, y, n, n * 2, spritesheet_index);
+    make_ui_quad(data, x, y, n, n, spritesheet_index);
+    return gen_faces(4, 1, data);
+}
+
+GLuint gen_logo_buffer(float x, float y, float n, char spritesheet_index) {
+    GLfloat *data = malloc_faces(4, 1);
+    //make_character(data, x, y, n, n * 2, spritesheet_index);
+    make_logo_quad(data, x, y, n, n, spritesheet_index);
+    return gen_faces(4, 1, data);
+}
+
+/*GLuint gen_background_buffer(float x, float y, float n, char spritesheet_index) {
+    GLfloat *data = malloc_faces(4, 1);
+    //make_character(data, x, y, n, n * 2, spritesheet_index);
+    make_logo_quad(data, x, y, n, n, spritesheet_index);
+    return gen_faces(4, 1, data);
+}*/
+
 void draw_triangles_3d_ao(Attrib *attrib, GLuint buffer, int count) {
 	glEnable(GL_BLEND); //*
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -91,6 +113,8 @@ void draw_triangles_3d(Attrib *attrib, GLuint buffer, int count) {
 }
 
 void draw_triangles_2d(Attrib *attrib, GLuint buffer, int count) {
+	glEnable(GL_BLEND); //*
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glEnableVertexAttribArray(attrib->position);
     glEnableVertexAttribArray(attrib->uv);
@@ -102,6 +126,7 @@ void draw_triangles_2d(Attrib *attrib, GLuint buffer, int count) {
     glDisableVertexAttribArray(attrib->position);
     glDisableVertexAttribArray(attrib->uv);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glDisable(GL_BLEND);
 }
 
 void draw_lines(Attrib *attrib, GLuint buffer, int components, int count) {
@@ -157,6 +182,24 @@ void draw_plant(Attrib *attrib, GLuint buffer) {
 
 void draw_player(Attrib *attrib, Player *player) {
     draw_cube(attrib, player->buffer);
+}
+
+void draw_ui(Attrib *attrib, GLuint buffer) {
+    glEnable(GL_BLEND); //*
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    draw_triangles_2d(attrib, buffer, 6); //wtf is 6.
+    glDisable(GL_BLEND);
+}
+
+void draw_logo(Attrib *attrib, GLuint buffer) {
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glUseProgram(attrib->program);
+    //glUniformMatrix4fv(attrib->matrix, 1, GL_FALSE, matrix);
+    //glUniform1i(attrib->sampler, 1);
+    //glUniform1i(attrib->extra1, 0);
+    draw_triangles_2d(attrib, buffer, 6); //wtf is 6.
+    glDisable(GL_BLEND);
 }
 
 GLuint gen_crosshair_buffer(int width, int height, int scale) {

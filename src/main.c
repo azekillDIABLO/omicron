@@ -155,9 +155,9 @@ void get_sky_tint(Biome biome, SkyColor *c) {
         //Not needed
         //case Biome_TEMPERATE:
         case Biome_DESERT:
-            c->r = 2.0f;
-            c->g = 1.7f,
-            c->b = 1.7f;
+            c->r = 1.6f;
+            c->g = 1.3f,
+            c->b = 1.0f;
             break;
         case Biome_MESA:
             c->r = 2.2f;
@@ -173,6 +173,11 @@ void get_sky_tint(Biome biome, SkyColor *c) {
             c->r = 2.0f;
             c->g = 2.0f,
             c->b = 2.0f;
+            break;
+        case Biome_SWAMP:
+            c->r = 0.4f;
+            c->g = 1.0f,
+            c->b = 0.6f;
             break;
         default:
             c->r = 1.0f;
@@ -868,7 +873,7 @@ void compute_chunk(WorkerItem *item) {
                 // END TODO
 				opaque[XYZ(x, y, z)] = !is_transparent(w);
 				transparent[XYZ(x, y, z)] = is_transparent(w); // dupe needed
-				visible[XYZ(x, y, z)] = !is_invisible(w); //needs modification to avoid border bugs...
+				visible[XYZ(x, y, z)] = !is_invisible(w);
                 
                 if (opaque[XYZ(x, y, z)]) {
                     highest[XZ(x, z)] = MAX(highest[XZ(x, z)], y);
@@ -1811,7 +1816,7 @@ void render_item_count(Attrib *attrib, float ts) {
     }
 }
 
-void render_ui(Attrib *attrib) {
+void render_ui_texture(Attrib *attrib) {
     float matrix[16];
     glUseProgram(attrib->program);
     set_matrix_item(matrix, g->width, g->height, g->scale + 1);
@@ -2308,10 +2313,10 @@ void on_key(GLFWwindow *window, int key, int scancode, int action, int mods) {
         if (g->typing) {
             g->typing = 0;
         }
-        else if (exclusive) {
-            glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-        }
     }
+    if (key == GLFW_KEY_LEFT_ALT) {
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	}
     if (key == GLFW_KEY_ENTER) {
         if (g->typing) {
             if (mods & GLFW_MOD_SHIFT) {
@@ -2501,7 +2506,7 @@ void create_window() {
         window_height = modes[mode_count - 1].height;
     }
     g->window = glfwCreateWindow(
-        window_width, window_height, "Omicron", monitor, NULL);
+        window_width, window_height, "Omicron, enjoy.", monitor, NULL);
 
     //g->is_fullscreen = FULLSCREEN;
 }
@@ -2537,6 +2542,13 @@ void handle_mouse_input() {
     else {
         glfwGetCursorPos(g->window, &px, &py);
     }
+}
+
+void handle_mouse_input_in_menu() {
+    static double px = 0;
+    static double py = 0;
+    glfwSetInputMode(g->window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    glfwGetCursorPos(g->window, &px, &py);
 }
 
 void handle_movement(double dt) {
@@ -2646,6 +2658,15 @@ void handle_movement(double dt) {
         s->y = highest_block(s->x, s->z) + 2;
     }
 }
+
+void menu_movement(double dt) {
+    static float dy = 0;
+    State *s = &g->players->state;
+    int sz = 0;
+    int sx = 0;
+    s->ry += 1;
+}
+
 
 void parse_buffer(char *buffer) {
     Player *me = g->players;
@@ -2758,10 +2779,10 @@ void update_sky_tint() {
     get_sky_tint(biome_at_pos(q, x, z), &new_color);
 
     //Interpolate sky color to get close to the actual value gradually.
-    // Technically, it won't arrive, but rather achieve an extremely close color.
-    c->r += 0.0625 * (new_color.r - c->r);
-    c->g += 0.0625 * (new_color.g - c->g);
-    c->b += 0.0625 * (new_color.b - c->b);
+    //Technically, it won't arrive, but rather achieve an extremely close color.
+    c->r += 0.01 * (new_color.r - c->r);
+    c->g += 0.01 * (new_color.g - c->g);
+    c->b += 0.01 * (new_color.b - c->b);
 
     //printf("c: %f last: %f\n", c->r, g->last_sky_color.r);
 }
@@ -2826,8 +2847,9 @@ int main(int argc, char **argv) {
     scanf("> %d", &world);
     printf("> Loading selected world.");
     */
-    printf("> Press RETURN to start");
-    getchar();
+    
+    //printf("> Press RETURN to start");
+    //getchar();
 
    
 
@@ -2855,7 +2877,6 @@ int main(int argc, char **argv) {
     }
 
     glEnable(GL_DEPTH_TEST);
-    glAlphaFunc(GL_GREATER, 0.4);
     glEnable(GL_ALPHA_TEST);
 	glEnable(GL_CULL_FACE);
     glLogicOp(GL_INVERT);
@@ -2870,13 +2891,21 @@ int main(int argc, char **argv) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     load_png_texture("textures/texture.png");
+    
+    /*GLuint texture_obj;
+    glGenTextures(1, &texture_obj);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture_obj);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    load_png_texture("textures/texture_obj.png");*/
 
     GLuint font;
     glGenTextures(1, &font);
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, font);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     load_png_texture("textures/font.png");
 
     GLuint sky;
@@ -2896,6 +2925,30 @@ int main(int argc, char **argv) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     load_png_texture("textures/sign.png");
+    
+    GLuint ui;
+    glGenTextures(1, &ui);
+    glActiveTexture(GL_TEXTURE4);
+    glBindTexture(GL_TEXTURE_2D, ui);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    load_png_texture("textures/ui.png");
+    
+    GLuint logo;
+    glGenTextures(1, &logo);
+    glActiveTexture(GL_TEXTURE5);
+    glBindTexture(GL_TEXTURE_2D, logo);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    load_png_texture("textures/logo.png"); //logo.png
+    
+    GLuint background;
+    glGenTextures(1, &background);
+    glActiveTexture(GL_TEXTURE6);
+    glBindTexture(GL_TEXTURE_2D, background);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    load_png_texture("textures/background.png"); //background.png
 
     // LOAD SHADERS //
     Attrib block_attrib = {0};
@@ -2903,7 +2956,8 @@ int main(int argc, char **argv) {
     Attrib line_attrib = {0};
     Attrib text_attrib = {0};
     Attrib sky_attrib = {0};
-    Attrib sun_attrib = {0};
+    Attrib ui_attrib = {0};
+    Attrib logo_attrib = {0};
     GLuint program;
 
     program = load_program(
@@ -2964,16 +3018,27 @@ int main(int argc, char **argv) {
     sky_attrib.timer = glGetUniformLocation(program, "timer");
     sky_attrib.extra1 = glGetUniformLocation(program, "sky_tint");
     
-    /*program = load_program(
-        "shaders/sun_vertex.glsl", "shaders/sun_fragment.glsl");
-    sun_attrib.program = program;
-    sun_attrib.position = glGetAttribLocation(program, "position");
-    sun_attrib.normal = glGetAttribLocation(program, "normal");
-    sun_attrib.uv = glGetAttribLocation(program, "uv");
-    sun_attrib.matrix = glGetUniformLocation(program, "matrix");
-    sun_attrib.sampler = glGetUniformLocation(program, "sampler");
-    sun_attrib.timer = glGetUniformLocation(program, "timer");
-    sun_attrib.extra1 = glGetUniformLocation(program, "sky_tint");*/
+    program = load_program(
+        "shaders/ui_vertex.glsl", "shaders/ui_fragment.glsl");
+    ui_attrib.program = program;
+    ui_attrib.position = glGetAttribLocation(program, "position");
+    ui_attrib.normal = glGetAttribLocation(program, "normal");
+    ui_attrib.uv = glGetAttribLocation(program, "uv");
+    ui_attrib.matrix = glGetUniformLocation(program, "matrix");
+    ui_attrib.sampler = glGetUniformLocation(program, "sampler");
+    ui_attrib.timer = glGetUniformLocation(program, "timer");
+    ui_attrib.extra1 = glGetUniformLocation(program, "sky_tint");
+    
+    program = load_program(
+        "shaders/ui_vertex.glsl", "shaders/ui_fragment.glsl");
+    logo_attrib.program = program;
+    logo_attrib.position = glGetAttribLocation(program, "position");
+    logo_attrib.normal = glGetAttribLocation(program, "normal");
+    logo_attrib.uv = glGetAttribLocation(program, "uv");
+    logo_attrib.matrix = glGetUniformLocation(program, "matrix");
+    logo_attrib.sampler = glGetUniformLocation(program, "sampler");
+    logo_attrib.timer = glGetUniformLocation(program, "timer");
+	logo_attrib.extra1 = glGetUniformLocation(program, "sky_tint");
 
     // CHECK COMMAND LINE ARGUMENTS //
     if (argc == 2 || argc == 3) {
@@ -3051,191 +3116,390 @@ int main(int argc, char **argv) {
         // BEGIN MAIN LOOP //
 		
         double previous = glfwGetTime();
+        
+          // ---------- //\
+         // GAME MODES //  \
+        // ---------- //    \
+        
+        int game_state = 0; // switch: 0 menu (dflt), 1 normal
+        
         while (1) {
-			if (INFINI_STUFF == 1) {
-				g->inventory.count[items[g->item_index]] = 16;
-				//printf("%d %d\n", items[g->item_index], (int) g->inventory.count[items[g->item_index]]);
+			
+			// ----------------- //
+			// FIRST MODE (MENU) //
+			// ----------------- // *is wip
+			
+			
+			if (game_state == 0) {
+
+				// WINDOW SIZE AND SCALE //
+				g->scale = get_scale_factor();
+				glfwGetFramebufferSize(g->window, &g->width, &g->height);
+				glViewport(0, 0, g->width, g->height);
+				
+				double now = glfwGetTime();
+				double dt = now - previous;
+				dt = MIN(dt, 0.2);
+				dt = MAX(dt, 0.0);
+				previous = now;
+
+				// HANDLE MOUSE INPUT //
+				handle_mouse_input_in_menu();
+				
+				double cx;
+				double cy;
+				glfwGetCursorPos(g->window, &cx, &cy);
+				int state = glfwGetMouseButton(g->window, GLFW_MOUSE_BUTTON_LEFT);
+				
+				// TURN AROUND RANDOMLY //
+				//menu_movement(dt);
+
+				// HANDLE DATA FROM SERVER //
+				char *buffer = client_recv();
+				if (buffer) {
+					parse_buffer(buffer);
+					free(buffer);
+				}
+
+				// FLUSH DATABASE //
+				if (now - last_commit > COMMIT_INTERVAL) {
+					last_commit = now;
+					db_commit();
+				}
+
+				// SEND POSITION TO SERVER //
+				if (now - last_update > 0.1) {
+					last_update = now;
+					client_position(s->x, s->y, s->z, s->rx, s->ry);
+				}
+				
+				// CLEAR SCREEN
+				glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+				// PREPARE TO RENDER //
+				update_sky_tint();
+				g->observe1 = g->observe1 % g->player_count;
+				g->observe2 = g->observe2 % g->player_count;
+				delete_chunks();
+				del_buffer(me->buffer);
+				me->buffer = gen_player_buffer(s->x, s->y, s->z, s->rx, s->ry);
+				for (int i = 1; i < g->player_count; i++) {
+					interpolate_player(g->players + i);
+				}
+				Player *player = g->players + g->observe1;
+				
+				
+
+				// RENDER HUD //
+				
+				char text_buffer[1024];
+				float ts = FONT_SIZE * g->scale;
+				float tx = ts / 2;
+				float ty = g->height - ts;
+				
+				
+				// PLAY BUTTON TEXT //
+				//if (cx > (g->width/2-24*3) && cx < (g->width/2+24*3)) {
+					//if (cy > (g->height/2-22) && cy < (g->height/2+22)) {
+						snprintf(text_buffer, 1024, "Play");
+						render_text(&text_attrib, ALIGN_LEFT, g->width/2-ts*1.5, g->height/2, ts, text_buffer, g->width, g->height);
+					//}
+				//}
+				
+				// MATRIX FOR GUI //
+				float matrix[16];
+				set_matrix_2d(matrix, g->width, g->height);
+				glUseProgram(ui_attrib.program);
+				glUniformMatrix4fv(ui_attrib.matrix, 1, GL_FALSE, matrix);
+				glUniform1i(ui_attrib.sampler, 4);
+				glUniform1i(ui_attrib.extra1, 0);
+
+				// PLAY BUTTON //
+				
+				GLuint button_left_on   = gen_ui_buffer(g->width/2 - (24 * g->scale)*2, g->height/2, 24 * g->scale, 10);
+				GLuint button_middle_on = gen_ui_buffer(g->width/2 , g->height/2, 24 * g->scale, 11);
+				GLuint button_right_on  = gen_ui_buffer(g->width/2 + (24 * g->scale)*2, g->height/2, 24 * g->scale, 12);
+			
+				GLuint button_left   	= gen_ui_buffer(g->width/2 - (24 * g->scale)*2, g->height/2, 24 * g->scale, 6);
+				GLuint button_middle 	= gen_ui_buffer(g->width/2 , g->height/2, 24 * g->scale, 7);
+				GLuint button_right	  	= gen_ui_buffer(g->width/2 + (24 * g->scale)*2, g->height/2, 24 * g->scale, 8);
+					
+				
+				
+				if (cx > (g->width/2-24*3) && cx < (g->width/2+24*3) && cy > (g->height/2-22) && cy < (g->height/2+22)) {	
+					draw_ui(&ui_attrib, button_left_on);
+					draw_ui(&ui_attrib, button_middle_on);
+					draw_ui(&ui_attrib, button_right_on);
+					
+					// CLICK ACTION
+					if (state == GLFW_PRESS) {
+						game_state = 1;
+						glfwSetInputMode(g->window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+					}
+					
+				} else {
+					draw_ui(&ui_attrib, button_left);
+					draw_ui(&ui_attrib, button_middle);
+					draw_ui(&ui_attrib, button_right);
+				}
+		
+				del_buffer(button_left);
+				del_buffer(button_middle);
+				del_buffer(button_right);
+				
+				// RENDER LOGO //
+				//glUniformMatrix4fv(logo_attrib.matrix, 2, GL_TRUE, matrix);
+				glUniform1i(ui_attrib.sampler, 5);
+				GLuint logo_buffer = gen_logo_buffer(g->width/2, (g->height/4)*3, 128 * g->scale, 8);
+				draw_logo(&ui_attrib, logo_buffer);
+				del_buffer(logo_buffer);
+
+
+				
+
+				// RENDER TEXT // *optimisation needed for the render of lines. \n maybe?
+				snprintf(text_buffer, 1024, "Omicron version 0.6 `Menupdate`");
+				render_text(&text_attrib, ALIGN_LEFT, tx, ty, ts, text_buffer, g->width, g->height);
+				//ty -= ts * 2;
+				
+				
+				snprintf(text_buffer, 1024, "Credits:");
+				render_text(&text_attrib, ALIGN_LEFT, g->width - ts*20, (ts+2)*3, ts, text_buffer, g->width, g->height);
+				
+				snprintf(text_buffer, 1024, "- Michael Fogleman");
+				render_text(&text_attrib, ALIGN_LEFT, g->width - ts*20, (ts+2)*2, ts, text_buffer, g->width, g->height);
+				
+				snprintf(text_buffer, 1024, "- Twetzel");
+				render_text(&text_attrib, ALIGN_LEFT, g->width - ts*20, (ts+2)*1, ts, text_buffer, g->width, g->height);
+				
+				
+				//snprintf(text_buffer, 1024, "sample test");
+				//render_text(&text_attrib, ALIGN_RIGHT, tx, ty, ts, text_buffer, g->width, g->height);
+
+				// RENDER BACKGROUND //
+				glUniform1i(ui_attrib.sampler, 6);
+				GLuint bg_buffer = gen_logo_buffer(g->width/2, g->height/2, g->width * g->scale, 1);
+				draw_ui(&ui_attrib, bg_buffer);
+				del_buffer(bg_buffer);
+
+				
+				// SWAP AND POLL //
+				glfwSwapBuffers(g->window);
+				glfwPollEvents();
+				if (glfwWindowShouldClose(g->window)) {
+					running = 0;
+					break;
+				}
+				if (g->mode_changed) {
+					g->mode_changed = 0;
+					break;
+				}
 			}
+			
+			
+			// -------------------- //
+			// SECOND MODE (NORMAL) //
+			// -------------------- //
+			
+			
+			if (game_state == 1) {
+				if (INFINITE_STUFF == 1) {
+					g->inventory.count[items[g->item_index]] = 16;
+					//printf("%d %d\n", items[g->item_index], (int) g->inventory.count[items[g->item_index]]);
+				}
 
-            // WINDOW SIZE AND SCALE //
-            g->scale = get_scale_factor();
-            glfwGetFramebufferSize(g->window, &g->width, &g->height);
-            glViewport(0, 0, g->width, g->height);
+				// WINDOW SIZE AND SCALE //
+				g->scale = get_scale_factor();
+				glfwGetFramebufferSize(g->window, &g->width, &g->height);
+				glViewport(0, 0, g->width, g->height);
 
-            // FRAME RATE //
-            if (g->time_changed) {
-                g->time_changed = 0;
-                last_commit = glfwGetTime();
-                last_update = glfwGetTime();
-                memset(&fps, 0, sizeof(fps));
-            }
-            update_fps(&fps);
-            double now = glfwGetTime();
-            double dt = now - previous;
-            dt = MIN(dt, 0.2);
-            dt = MAX(dt, 0.0);
-            previous = now;
+				// FRAME RATE //
+				if (g->time_changed) {
+					g->time_changed = 0;
+					last_commit = glfwGetTime();
+					last_update = glfwGetTime();
+					memset(&fps, 0, sizeof(fps));
+				}
+				update_fps(&fps);
+				double now = glfwGetTime();
+				double dt = now - previous;
+				dt = MIN(dt, 0.2);
+				dt = MAX(dt, 0.0);
+				previous = now;
 
-            // HANDLE MOUSE INPUT //
-            handle_mouse_input();
-            
-            
-            // HANDLE MOVEMENT //
-            handle_movement(dt);
+				// HANDLE MOUSE INPUT //
+				handle_mouse_input();
+				
+				
+				// HANDLE MOVEMENT //
+				handle_movement(dt);
 
-            // HANDLE DATA FROM SERVER //
-            char *buffer = client_recv();
-            if (buffer) {
-                parse_buffer(buffer);
-                free(buffer);
-            }
+				// HANDLE DATA FROM SERVER //
+				char *buffer = client_recv();
+				if (buffer) {
+					parse_buffer(buffer);
+					free(buffer);
+				}
 
-            // FLUSH DATABASE //
-            if (now - last_commit > COMMIT_INTERVAL) {
-                last_commit = now;
-                db_commit();
-            }
+				// FLUSH DATABASE //
+				if (now - last_commit > COMMIT_INTERVAL) {
+					last_commit = now;
+					db_commit();
+				}
 
-            // SEND POSITION TO SERVER //
-            if (now - last_update > 0.1) {
-                last_update = now;
-                client_position(s->x, s->y, s->z, s->rx, s->ry);
-            }
+				// SEND POSITION TO SERVER //
+				if (now - last_update > 0.1) {
+					last_update = now;
+					client_position(s->x, s->y, s->z, s->rx, s->ry);
+				}
 
-            // PREPARE TO RENDER //
-            update_sky_tint();
-            g->observe1 = g->observe1 % g->player_count;
-            g->observe2 = g->observe2 % g->player_count;
-            delete_chunks();
-            del_buffer(me->buffer);
-            me->buffer = gen_player_buffer(s->x, s->y, s->z, s->rx, s->ry);
-            for (int i = 1; i < g->player_count; i++) {
-                interpolate_player(g->players + i);
-            }
-            Player *player = g->players + g->observe1;
+				// PREPARE TO RENDER //
+				update_sky_tint();
+				g->observe1 = g->observe1 % g->player_count;
+				g->observe2 = g->observe2 % g->player_count;
+				delete_chunks();
+				del_buffer(me->buffer);
+				me->buffer = gen_player_buffer(s->x, s->y, s->z, s->rx, s->ry);
+				for (int i = 1; i < g->player_count; i++) {
+					interpolate_player(g->players + i);
+				}
+				Player *player = g->players + g->observe1;
 
-            // RENDER 3-D SCENE //
-            glClear(GL_COLOR_BUFFER_BIT);
-            glClear(GL_DEPTH_BUFFER_BIT);
-            render_sky(&sky_attrib, player, sky_buffer);
-            glClear(GL_DEPTH_BUFFER_BIT);
-            int face_count = render_chunks(&block_attrib, player);
-            render_chunks(&tblock_attrib, player);
-            render_signs(&text_attrib, player);
-            render_sign(&text_attrib, player);
-            render_players(&block_attrib, player);
+				// RENDER 3-D SCENE //
+				glClear(GL_COLOR_BUFFER_BIT);
+				glClear(GL_DEPTH_BUFFER_BIT);
+				render_sky(&sky_attrib, player, sky_buffer);
+				glClear(GL_DEPTH_BUFFER_BIT);
+				int face_count = render_chunks(&block_attrib, player);
+				render_chunks(&tblock_attrib, player);
+				render_signs(&text_attrib, player);
+				render_sign(&text_attrib, player);
+				render_players(&block_attrib, player);
 
-            // RENDER HUD //
-            glClear(GL_DEPTH_BUFFER_BIT);
-            if (SHOW_CROSSHAIRS) {
-                render_crosshairs(&line_attrib, g->width, g->height, g->scale);
-            }
-            char text_buffer[1024];
-            float ts = 12 * g->scale;
-            float tx = ts / 2;
-            float ty = g->height - ts;
-            if (SHOW_ITEM) {
-                render_item(&block_attrib);
-                render_item(&tblock_attrib);
-                render_item_count(&text_attrib, ts);
-            }
+				// RENDER HUD //
+				glClear(GL_DEPTH_BUFFER_BIT);
+				if (SHOW_CROSSHAIRS) {
+					render_crosshairs(&line_attrib, g->width, g->height, g->scale);
+				}
+				char text_buffer[1024];
+				float ts = FONT_SIZE * g->scale;
+				float tx = ts / 2;
+				float ty = g->height - ts;
+				if (SHOW_ITEM) {
+					render_item(&block_attrib);
+					render_item(&tblock_attrib);
+					render_item_count(&text_attrib, ts);
+				}
+				//render_gui_texture(&ui_attrib);
 
-            // RENDER TEXT //
-            if (SHOW_INFO_TEXT) {
-                int hour = time_of_day() * 24;
-                char am_pm = hour < 12 ? 'a' : 'p';
-                hour = hour % 12;
-                hour = hour ? hour : 12;
-                snprintf(
-                    text_buffer, 1024,
-                    "(%d, %d) (%.2f, %.2f, %.2f) [%d, %d, %d] %d%cm %dfps",
-                    chunked(s->x), chunked(s->z), s->x, s->y, s->z,
-                    g->player_count, g->chunk_count,
-                    face_count * 2, hour, am_pm, fps.fps);
-                render_text(&text_attrib, ALIGN_LEFT, tx, ty, ts, text_buffer, g->width, g->height);
-                ty -= ts * 2;
-            }
-            if (SHOW_CHAT_TEXT) {
-                for (int i = 0; i < MAX_MESSAGES; i++) {
-                    int index = (g->message_index + i) % MAX_MESSAGES;
-                    if (strlen(g->messages[index])) {
-                        render_text(&text_attrib, ALIGN_LEFT, tx, ty, ts,
-                            g->messages[index], g->width, g->height);
-                        ty -= ts * 2;
-                    }
-                }
-            }
-            if (g->typing) {
-                snprintf(text_buffer, 1024, "> %s", g->typing_buffer);
-                render_text(&text_attrib, ALIGN_LEFT, tx, ty, ts, text_buffer,
-                    g->width, g->height);
-                ty -= ts * 2;
-            }
-            if (SHOW_PLAYER_NAMES) {
-                if (player != me) {
-                    render_text(&text_attrib, ALIGN_CENTER,
-                        g->width / 2, ts, ts, player->name,
-                        g->width, g->height);
-                }
-                Player *other = player_crosshair(player);
-                if (other) {
-                    render_text(&text_attrib, ALIGN_CENTER,
-                        g->width / 2, g->height / 2 - ts - 24, ts,
-                        other->name, g->width, g->height);
-                }
-            }
+				// RENDER TEXT //
+				if (SHOW_INFO_TEXT) {
+					int hour = time_of_day() * 24;
+					char am_pm = hour < 12 ? 'a' : 'p';
+					hour = hour % 12;
+					hour = hour ? hour : 12;
+					snprintf(
+						text_buffer, 1024,
+						"(%d, %d) (%.2f, %.2f, %.2f) [%d, %d, %d] %d%cm %dfps",
+						chunked(s->x), chunked(s->z), s->x, s->y, s->z,
+						g->player_count, g->chunk_count,
+						face_count * 2, hour, am_pm, fps.fps);
+					render_text(&text_attrib, ALIGN_LEFT, tx, ty, ts, text_buffer, g->width, g->height);
+					ty -= ts * 2;
+				}
+				if (SHOW_CHAT_TEXT) {
+					for (int i = 0; i < MAX_MESSAGES; i++) {
+						int index = (g->message_index + i) % MAX_MESSAGES;
+						if (strlen(g->messages[index])) {
+							render_text(&text_attrib, ALIGN_LEFT, tx, ty, ts,
+								g->messages[index], g->width, g->height);
+							ty -= ts * 2;
+						}
+					}
+				}
+				if (g->typing) {
+					snprintf(text_buffer, 1024, "> %s", g->typing_buffer);
+					render_text(&text_attrib, ALIGN_LEFT, tx, ty, ts, text_buffer,
+						g->width, g->height);
+					ty -= ts * 2;
+				}
+				if (SHOW_PLAYER_NAMES) {
+					if (player != me) {
+						render_text(&text_attrib, ALIGN_CENTER,
+							g->width / 2, ts, ts, player->name,
+							g->width, g->height);
+					}
+					Player *other = player_crosshair(player);
+					if (other) {
+						render_text(&text_attrib, ALIGN_CENTER,
+							g->width / 2, g->height / 2 - ts - 24, ts,
+							other->name, g->width, g->height);
+					}
+				}
+				
+				// RETURN TO MENU WHEN PRESSING ESCAPE
+				int esc = glfwGetKey(g->window, GLFW_KEY_ESCAPE);
+				if (esc == GLFW_PRESS) {
+					game_state = 0;
+					// Clear screen
+					glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
+					glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+				}
+				
 
-            // RENDER PICTURE IN PICTURE //
-            if (g->observe2) {
-                player = g->players + g->observe2;
+				// RENDER PICTURE IN PICTURE //
+				if (g->observe2) {
+					player = g->players + g->observe2;
 
-                int pw = 256 * g->scale;
-                int ph = 256 * g->scale;
-                int offset = 32 * g->scale;
-                int pad = 3 * g->scale;
-                int sw = pw + pad * 2;
-                int sh = ph + pad * 2;
+					int pw = 256 * g->scale;
+					int ph = 256 * g->scale;
+					int offset = 32 * g->scale;
+					int pad = 3 * g->scale;
+					int sw = pw + pad * 2;
+					int sh = ph + pad * 2;
 
-                glEnable(GL_SCISSOR_TEST);
-                glScissor(g->width - sw - offset + pad, offset - pad, sw, sh);
-                glClear(GL_COLOR_BUFFER_BIT);
-                glDisable(GL_SCISSOR_TEST);
-                glClear(GL_DEPTH_BUFFER_BIT);
-                glViewport(g->width - pw - offset, offset, pw, ph);
+					glEnable(GL_SCISSOR_TEST);
+					glScissor(g->width - sw - offset + pad, offset - pad, sw, sh);
+					glClear(GL_COLOR_BUFFER_BIT);
+					glDisable(GL_SCISSOR_TEST);
+					glClear(GL_DEPTH_BUFFER_BIT);
+					glViewport(g->width - pw - offset, offset, pw, ph);
 
-                g->width = pw;
-                g->height = ph;
-                g->ortho = 0;
-                g->fov = 65;
+					g->width = pw;
+					g->height = ph;
+					g->ortho = 0;
+					g->fov = 65;
 
-                render_sky(&sky_attrib, player, sky_buffer);
-                glClear(GL_DEPTH_BUFFER_BIT);
-                render_chunks(&block_attrib, player);
-                render_chunks(&tblock_attrib, player);
-                render_signs(&text_attrib, player);
-                render_players(&block_attrib, player);
-                glClear(GL_DEPTH_BUFFER_BIT);
-                if (SHOW_PLAYER_NAMES) {
-                    render_text(&text_attrib, ALIGN_CENTER,
-                        pw / 2, ts, ts, player->name,
-                        g->width, g->height);
-                }
-            }
+					render_sky(&sky_attrib, player, sky_buffer);
+					glClear(GL_DEPTH_BUFFER_BIT);
+					render_chunks(&block_attrib, player);
+					render_chunks(&tblock_attrib, player);
+					render_signs(&text_attrib, player);
+					render_players(&block_attrib, player);
+					glClear(GL_DEPTH_BUFFER_BIT);
+					if (SHOW_PLAYER_NAMES) {
+						render_text(&text_attrib, ALIGN_CENTER,
+							pw / 2, ts, ts, player->name,
+							g->width, g->height);
+					}
+				}
 
-            // SWAP AND POLL //
-            glfwSwapBuffers(g->window);
-            glfwPollEvents();
-            if (glfwWindowShouldClose(g->window)) {
-                running = 0;
-                break;
-            }
-            if (g->mode_changed) {
-                g->mode_changed = 0;
-                break;
-            }
-            
-            // OUTPUT IN TERMINAL //
-			advance_cursor();
+				// SWAP AND POLL //
+				glfwSwapBuffers(g->window);
+				glfwPollEvents();
+				if (glfwWindowShouldClose(g->window)) {
+					running = 0;
+					break;
+				}
+				if (g->mode_changed) {
+					g->mode_changed = 0;
+					break;
+				}
+				
+				// OUTPUT IN TERMINAL //
+				//advance_cursor();
+			}
         }
 
         // SHUTDOWN // There's a segfault in this sequence

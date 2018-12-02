@@ -29,6 +29,14 @@ void make_character(
     float *data,
     float x, float y, float n, float m, char c);
 
+void make_ui_quad(
+    float *data,
+    float x, float y, float n, float m, char spritesheet_index);
+    
+void make_logo_quad(
+    float *data,
+    float x, float y, float n, float m, char spritesheet_index);
+
 void make_character_3d(
     float *data, float x, float y, float z, float n, int face, char c);
 

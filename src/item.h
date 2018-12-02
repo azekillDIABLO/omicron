@@ -96,6 +96,7 @@ extern const int items[];
 extern const int item_count;
 extern const int blocks[256][6];
 extern const int plants[256];
+extern const int obj[256];
 
 int is_plant(int w);
 int is_obstacle(int w);
@@ -107,6 +108,8 @@ int is_climbable(int w);
 int is_noncube(int w);
 int is_liquid(int w);
 int buildable_to(int w);
+int is_placeable(int w);
+
 
 NonCubeType noncube_type(int w);
 

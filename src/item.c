@@ -225,6 +225,10 @@ const int plants[256] = {
     
 };
 
+const int obj[256] = {
+	60 // 90 - swamp tall grass 
+};
+
 int is_plant(int w) {
     switch (w) {
         case Item_TALL_GRASS:
@@ -353,6 +357,16 @@ int is_liquid(int w) {
 
 int is_noncube(int w) {
     return noncube_type(w) != NonCubeType_NOT_NONCUBE;
+}
+
+int is_placeable(int w) {
+    w = ABS(w);
+    switch (w) {
+       //case something
+            return 0;
+        default:
+            return 1;
+    }
 }
 
 NonCubeType noncube_type(int w) {

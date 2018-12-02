@@ -7,7 +7,7 @@
 #define CLIMB_SPEED 4
 #define BUILD_HEIGHT_LIMIT 255
 #define NUM_INVENTORY_VISIBLE 7
-#define INFINI_STUFF 1
+#define INFINITE_STUFF 1
 
 //mapgen
 #define BIOME_SIZE 1.0 //should be small, or you won't see any variety!
@@ -36,6 +36,7 @@
 #define SHOW_INFO_TEXT 1
 #define SHOW_CHAT_TEXT 1
 #define SHOW_PLAYER_NAMES 1
+#define FONT_SIZE 16 // 12 small, 16 average, 24, big
 
 // key bindings
 #define CRAFT_KEY_FORWARD 'W'

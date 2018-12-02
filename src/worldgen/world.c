@@ -89,7 +89,7 @@ void create_world(int p, int q, world_func func, void *arg) {
             // Unbreakable Core shell
             func(x, 0, z, Item_CORESHELL * flag, arg);
             if (simplex2(
-					x * 0.4, z * 0.4, 7, 3, 5) > 0.6) {
+					x * 0.4, z * 0.4, 7, 3, 5) > 0.52) {
 				func(x, 1, z, Item_CORESHELL * flag, arg);
 			}
 			
