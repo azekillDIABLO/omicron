@@ -84,6 +84,7 @@ typedef enum {
 	Item_MUSHROOMS,
 	Item_SWAMP_GRASS,
 	Item_SWAMP_TALL_GRASS,
+	Item_TORCH,
     Item_max
 } Item;
 

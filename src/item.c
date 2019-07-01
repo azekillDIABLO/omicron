@@ -21,6 +21,7 @@ const int items[] = {
     Item_COBBLE,
     Item_LIGHT_STONE,
     Item_DARK_STONE,
+    Item_TORCH,
     Item_CHEST,
     Item_TNT,
     Item_LEAVES,
@@ -191,6 +192,7 @@ const int blocks[256][6] = {
     {0, 0, 0, 0, 0, 0}, // 88
     {19, 19, 35, 0, 19, 19}, // 89 - swamp dirt
     {0, 0, 0, 0, 0, 0}, // 90
+    {0, 0, 0, 0, 0, 16}, // 91
     {0, 0, 0, 0, 0, 0} // - empty
 };
 
@@ -221,12 +223,13 @@ const int plants[256] = {
     58, // 87 - mushroom
     59, // 88 - mushroom patch
     0,
-	60 // 90 - swamp tall grass
+	60, // 90 - swamp tall grass
+	96 // 91 - torch
     
 };
 
 const int obj[256] = {
-	60 // 90 - swamp tall grass 
+	6 // test
 };
 
 int is_plant(int w) {
@@ -244,6 +247,7 @@ int is_plant(int w) {
         case Item_MUSHROOM:
         case Item_MUSHROOMS:
         case Item_SWAMP_TALL_GRASS:
+        case Item_TORCH:
             return 1;
         default:
             return 0;
@@ -262,6 +266,7 @@ int is_obstacle(int w) {
         case Item_EMPTY:
         case Item_CLOUD:
         case Item_WATER:
+        case Item_TORCH:
             return 0;
         default:
             return 1;
@@ -284,6 +289,7 @@ int is_transparent(int w) {
         case Item_GLASS:
         //case Item_LEAVES: //for better performance (8 fps -> 60fps OPTIMIZATION NEEDED!) 
         case Item_WATER: //Just to stop Xray-ing
+        case Item_TORCH:
             return 1;
         default:
             return 0;
@@ -322,6 +328,7 @@ int buildable_to(int w) {
     switch (w) {
         case Item_WATER:
         case Item_CLOUD:
+        case Item_TORCH:
             return 0;
         default:
             return 1;

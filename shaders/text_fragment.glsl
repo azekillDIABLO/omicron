@@ -12,8 +12,8 @@ void main() {
 		discard;
 	}
     
-    //else {
-    //color.a = max(color.a, 0.4);
-    //}
+    else {
+		color.a = max(color.a, 0.4);
+    }
     gl_FragColor = color;
 }

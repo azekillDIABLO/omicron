@@ -7,7 +7,7 @@ void generateTemperate(int dx, int dz, int x, int z, int start_h, int h, int fla
     for (int y = start_h; y < h - 1; y++) {
 		func(x, y, z, Item_STONE * flag, arg);
 	}
-	for (int y = 0; y < 5; y++) {
+	for (int y = 0; y < 3; y++) {
 		func(x, h-y-1, z, Item_SAND * flag, arg);
 	}
      

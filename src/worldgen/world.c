@@ -33,12 +33,28 @@ void create_world(int p, int q, world_func func, void *arg) {
             int mh = g * simplex2(-x * 0.0005, -z * 0.0005, 2, 16.0, 2);
 
             mh += simplex2(-x * 0.0002, -z * 0.0002, 2, 16.0, 2) * simplex2(-x * 0.002, -z * 0.002, 2, 16.0, 2) * 100;
-
-            mh += 16;
+        
+            mh += simplex2(-x * 0.02, -z * 0.02, 3, 8.0, 2);
+            
+            if (simplex2(-x * 0.0004, -z * 0.0004, 4, 4.0, 3)> 0.59) {
+				mh += 8;
+			}
             
             int h = f * mh;
             
-            
+            // Floating balls test
+             
+            /*for (int y = 0; y < 25; y++) {
+                if (simplex3(
+                    x * 0.001, (y+h) * 0.001, z * 0.001, 6, 1, 2) > 0.52)
+                {
+					if (y < 255) {
+						func(x, (y+h), z, Item_COLOR_13 * flag, arg);
+					}
+                }
+            }*/
+			
+			
             // Ocean system (generates water under y == 45)
             for (int y = 22; y < 45; y++) { 
 				func(x, y, z, Item_WATER * flag, arg);
@@ -46,9 +62,9 @@ void create_world(int p, int q, world_func func, void *arg) {
             
             // ice on frigid biomes
 			float biomen = simplex3(-x * 0.0005 * (1 / BIOME_SIZE), -z * 0.0005 * (1 / BIOME_SIZE), q * 0.001, 2, 16.0, 1);
-			if(biomen > (4.0f/5.0f) && biomen < (5.0f/5.0f)) {
+			if(biomen > (1.0f/6.0f) && biomen < (2.0f/6.0f)) {
 				// 2 ice layers on water
-				if (simplex2(x * 0.0004, z * 0.0004, 8, 1.5, 2) > 0.6) {
+				if (simplex2(x * 0.0004, z * 0.0004, 8, 1.5, 2) > 0.59) {
 					func(x, 43, z, Item_ICE * flag, arg);
 					func(x, 44, z, Item_ICE * flag, arg);
 				}
@@ -78,7 +94,7 @@ void create_world(int p, int q, world_func func, void *arg) {
 			
 
             // clouds
-            for (int y = 120; y < 200; y++) {
+            for (int y = 100; y < 180; y++) {
                 if (simplex3(
                     x * 0.001, y * 0.004, z * 0.001, 6, 1, 2) > 0.7)
                 {
@@ -108,23 +124,23 @@ Biome biome_at_pos(int q, int x, int z) {
     Biome biome = Biome_max;
 
     if(biomen > (1.0f/6.0f)) {
-        biome = Biome_TEMPERATE;
+        biome = Biome_TAIGA;
     }
     if(biomen > (2.0f/6.0f)) {
-        biome = Biome_DESERT;
+        biome = Biome_SWAMP;
     }
     if(biomen > (3.0f/6.0f)) {
-        biome = Biome_RAINFOREST;
+        biome = Biome_TEMPERATE;
     }
    
     if(biomen > (4.0f/6.0f)) {
-        biome = Biome_TAIGA;
+        biome = Biome_RAINFOREST;
     }
 	if(biome == (5.0/6.0)) {
-        biome = Biome_MESA;
+        biome = Biome_DESERT;
     } 
     if(biome == (Biome_max)) {
-        biome = Biome_SWAMP;
+        biome = Biome_MESA;
     } 
     return biome;
 }

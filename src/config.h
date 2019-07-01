@@ -1,6 +1,10 @@
 #ifndef _config_h_
 #define _config_h_
 
+
+// TODO: Transfer the maximum of stuff to ingame tweakable config (main.c)
+
+
 //game
 #define FLY_SPEED 70
 #define WALK_SPEED 6
@@ -16,9 +20,9 @@
 // app parameters
 #define DEBUG 1
 #define FULLSCREEN 0 //put to zero, fullscreen bugs
-#define WINDOW_WIDTH 1024
+#define WINDOW_WIDTH 1366
 #define WINDOW_HEIGHT 768
-#define VSYNC 1
+#define VSYNC 0
 #define SCROLL_THRESHOLD 0.1
 #define MAX_MESSAGES 10
 #define DB_PATH "world/omicron-world.db"
@@ -26,17 +30,9 @@
 #define DAY_LENGTH 500
 #define INVERT_MOUSE 0
 
-// rendering options
-#define SHOW_LIGHTS 1
-#define SHOW_PLANTS 1
-#define SHOW_CLOUDS 1
-#define SHOW_TREES 1
-#define SHOW_ITEM 1
-#define SHOW_CROSSHAIRS 1
-#define SHOW_INFO_TEXT 1
-#define SHOW_CHAT_TEXT 1
-#define SHOW_PLAYER_NAMES 1
-#define FONT_SIZE 16 // 12 small, 16 average, 24, big
+// rendering options 
+// were transfered to
+// options in main.c
 
 // key bindings
 #define CRAFT_KEY_FORWARD 'W'
@@ -57,10 +53,10 @@
 #define CRAFT_KEY_SIGN '-'
 
 // advanced parameters
-#define CREATE_CHUNK_RADIUS 10
-#define RENDER_CHUNK_RADIUS 6
-#define RENDER_SIGN_RADIUS 6
-#define DELETE_CHUNK_RADIUS 14
+#define CREATE_CHUNK_RADIUS 5
+#define RENDER_CHUNK_RADIUS 4
+#define RENDER_SIGN_RADIUS 1.5
+#define DELETE_CHUNK_RADIUS 6
 #define CHUNK_SIZE 32
 #define COMMIT_INTERVAL 5
 

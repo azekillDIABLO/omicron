@@ -31,7 +31,7 @@ void generateBaseTerrain(int dx, int dz, int x, int z, int start_h, int h, int f
 			}
 		}
 		
-            		
+         		
 		// Caves  
 		for (int y = 1; y < 37; y++) {
 			if (simplex3(
@@ -46,5 +46,6 @@ void generateBaseTerrain(int dx, int dz, int x, int z, int start_h, int h, int f
 				func(x, y, z, 0 * flag, arg);
 			}
 		}
+		 
     }
 }

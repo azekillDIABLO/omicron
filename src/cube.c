@@ -10,6 +10,14 @@ void make_cube_faces(
     int wleft, int wright, int wtop, int wbottom, int wfront, int wback,
     float x, float y, float z, float scale, NonCubeType noncube)
 {
+    /*static const float positions[6][4][3] = {
+        {{-1, -1, -1}, {-1, -1, +1}, {-1, +1, -1}, {-1, +1, +1}},
+        {{+1, -1, -1}, {+1, -1, +1}, {+1, +1, -1}, {+1, +1, +1}},
+        {{-1, +1, -1}, {-1, +1, +1}, {+1, +1, -1}, {+1, +1, +1}},
+        {{-1, -1, -1}, {-1, -1, +1}, {+1, -1, -1}, {+1, -1, +1}},
+        {{-1, -1, -1}, {-1, +1, -1}, {+1, -1, -1}, {+1, +1, -1}},
+        {{-1, -1, +1}, {-1, +1, +1}, {+1, -1, +1}, {+1, +1, +1}}
+    };*/
     static const float positions[6][4][3] = {
         {{-1, -1, -1}, {-1, -1, +1}, {-1, +1, -1}, {-1, +1, +1}},
         {{+1, -1, -1}, {+1, -1, +1}, {+1, +1, -1}, {+1, +1, +1}},
@@ -18,6 +26,7 @@ void make_cube_faces(
         {{-1, -1, -1}, {-1, +1, -1}, {+1, -1, -1}, {+1, +1, -1}},
         {{-1, -1, +1}, {-1, +1, +1}, {+1, -1, +1}, {+1, +1, +1}}
     };
+    
     static const float normals[6][3] = {
         {-1, 0, 0},
         {+1, 0, 0},
@@ -185,6 +194,7 @@ void make_plant(
     mat_apply(data, ma, 24, 0, 10);
 }
 
+// Player model
 void make_player(
     float *data,
     float x, float y, float z, float rx, float ry)
