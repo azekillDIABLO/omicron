@@ -1,4 +1,4 @@
-## Omicron [site](https://azekilldiablo.github.io/games/omicron/)
+## Omicron | [site](https://azekilldiablo.github.io/games/omicron/)
 
 ### About
 
